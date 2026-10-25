@@ -1,14 +1,367 @@
 @use "../base/variables" as v;
 
 .footer {
-  min-height: 95px;
-  background: v.$color-navy;
-  color: rgba(255, 255, 255, 0.8);
+  position: relative;
+  width: 100%;
+  padding: 24px 0;
 
-  &__inner {
+  background: #080f1c;
+  color: #fff;
+
+  .container {
+    max-width: 1720px;
+    margin: 0 auto;
+    padding: 0 80px;
+  }
+
+  &__top {
+    display: grid;
+    grid-template-columns: minmax(280px, 1.8fr) repeat(2, minmax(140px, .8fr)) minmax(230px, 1.1fr);
+    column-gap: clamp(35px, 4vw, 90px);
+
+    padding-bottom: 65px;
+  }
+
+  &__about {
+    padding-right: 35px;
+  }
+
+  &__brand {
     display: flex;
     align-items: center;
-    min-height: 95px;
+    gap: 16px;
+
+    width: fit-content;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  &__logo {
+    width: 75px;
+    height: 75px;
+    flex-shrink: 0;
+
+    object-fit: contain;
+  }
+
+  &__brand-text {
+    display: flex;
+    flex-direction: column;
+    text-transform: uppercase;
+
+    span {
+      font-family: "Oswald", sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+
+    small {
+      margin-top: 6px;
+
+      font-family: "Oswald", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: .02em;
+
+      color: #df263b;
+    }
+  }
+
+  &__description {
+    max-width: 365px;
+    margin: 25px 0 0;
+
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.8;
+
+    color: #aab4c2;
+  }
+
+  &__column {
+    padding-left: 28px;
+    border-left: 1px solid rgba(255, 255, 255, .09);
+  }
+
+  &__title {
+    margin: 0 0 22px;
+
+    font-family: "Inter", sans-serif;
     font-size: 12px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+
+    color: #fff;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+
+    a {
+      font-family: "Inter", sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.45;
+
+      color: #aab4c2;
+      text-decoration: none;
+
+      transition: color .4s ease;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  &__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  &__contact {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+
+    color: #aab4c2;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 2px;
+
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  }
+
+  &__socials {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 27px;
+  }
+
+  &__social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 5px;
+
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+
+    color: #d5dbe3;
+    text-decoration: none;
+
+    transition:
+      background .4s ease,
+      border-color .4s ease,
+      color .4s ease,
+      transform .4s ease;
+
+    svg {
+      width: 19px;
+      height: 19px;
+
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    &:hover {
+      background: #d51f35;
+      border-color: #d51f35;
+      color: #fff;
+      transform: translateY(-3px);
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, .12);
+  }
+
+  &__copyright {
+    margin: 0;
+
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+
+    color: #8190a3;
+  }
+
+  &__legal {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    a {
+      font-family: "Inter", sans-serif;
+      font-size: 12px;
+      line-height: 1.5;
+
+      color: #8190a3;
+      text-decoration: none;
+
+      transition: color .4s ease;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  &__accent {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: #d51f35;
+  }
+
+  @media (max-width: 1200px) {
+    .container {
+      padding: 0 48px;
+    }
+
+    &__top {
+      grid-template-columns: 1.4fr 1fr 1fr;
+      row-gap: 50px;
+    }
+
+    &__about {
+      grid-column: 1 / -1;
+    }
+
+    &__column {
+      padding-left: 22px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    padding: 24px 0 24px;
+
+    .container {
+      padding: 0 32px;
+    }
+
+    &__top {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 40px 24px;
+      padding-bottom: 45px;
+    }
+
+    &__about {
+      grid-column: 1 / -1;
+      padding-right: 0;
+    }
+
+    &__logo {
+      width: 65px;
+      height: 65px;
+    }
+
+    &__brand-text {
+      span {
+        font-size: 21px;
+      }
+
+      small {
+        font-size: 11px;
+      }
+    }
+
+    &__description {
+      max-width: 390px;
+      margin-top: 22px;
+      font-size: 13px;
+    }
+
+    &__column {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    &__column--contacts {
+      grid-column: 1 / -1;
+    }
+
+    &__title {
+      margin-bottom: 18px;
+    }
+
+    &__nav {
+      gap: 13px;
+    }
+
+    &__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 17px;
+    }
+
+    &__legal {
+      flex-wrap: wrap;
+      gap: 14px 20px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .container {
+      padding: 0 24px;
+    }
+
+    &__top {
+      gap: 35px 16px;
+    }
+
+    &__brand-text span {
+      font-size: 19px;
+    }
+
+    &__nav a {
+      font-size: 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__nav a,
+    &__social,
+    &__legal a {
+      transition: none;
+    }
   }
 }
