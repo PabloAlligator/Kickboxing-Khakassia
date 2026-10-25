@@ -150,38 +150,196 @@
   }
 
 
+  // Спортсмены: горизонтальная лента IDEAL / Абонементы.
   function initAthletesCarousel() {
     const track = document.querySelector('[data-athletes-track]');
     const prev = document.querySelector('[data-athletes-prev]');
     const next = document.querySelector('[data-athletes-next]');
+    const counter = document.querySelector('[data-athletes-counter]');
     if (!track || !prev || !next) return;
 
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cards = [...track.querySelectorAll('.athlete-card')];
+    if (!cards.length) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const clamp = (x, low, high) => Math.min(Math.max(x, low), high);
+    const leftFor = index => cards[index].offsetLeft - cards[0].offsetLeft;
+    const activeIndex = () => cards.reduce((closest, card, index) =>
+      Math.abs(leftFor(index) - track.scrollLeft) < Math.abs(leftFor(closest) - track.scrollLeft) ? index : closest, 0);
 
-    function cardStep() {
-      const card = track.querySelector('.athlete-card');
-      if (!card) return track.clientWidth;
-      const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
-      return card.getBoundingClientRect().width + gap;
+    let raf = 0;
+    function sync() {
+      raf = 0;
+      const i = activeIndex();
+      if (counter) counter.textContent = `${String(i + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+      prev.disabled = track.scrollLeft <= 3;
+      next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 3;
     }
-
-    function updateControls() {
-      const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
-      prev.disabled = track.scrollLeft <= 2;
-      next.disabled = track.scrollLeft >= maxScroll - 2;
-    }
-
-    prev.addEventListener('click', () => {
-      track.scrollBy({ left: -cardStep(), behavior: reducedMotion ? 'auto' : 'smooth' });
+    function syncSoon() { if (!raf) raf = requestAnimationFrame(sync); }
+    const scrollToCard = i => track.scrollTo({left: leftFor(clamp(i, 0, cards.length - 1)), behavior: reduced.matches ? 'instant' : 'smooth'});
+    const step = direction => scrollToCard(activeIndex() + direction);
+    prev.addEventListener('click', () => step(-1));
+    next.addEventListener('click', () => step(1));
+    track.addEventListener('scroll', syncSoon, {passive: true});
+    track.addEventListener('keydown', event => {
+      if (event.target.closest('a, button')) return;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+        event.preventDefault(); step(event.key === 'ArrowRight' ? 1 : -1);
+      }
     });
 
-    next.addEventListener('click', () => {
-      track.scrollBy({ left: cardStep(), behavior: reducedMotion ? 'auto' : 'smooth' });
+    let drag = null;
+    track.addEventListener('dragstart', event => event.preventDefault());
+    track.addEventListener('pointerdown', event => {
+      if (event.pointerType !== 'mouse' || event.button !== 0 || event.target.closest('a, button')) return;
+      drag = {id: event.pointerId, x: event.clientX, start: track.scrollLeft, moved: false};
+      track.setPointerCapture(event.pointerId);
+      track.classList.add('is-dragging');
     });
+    track.addEventListener('pointermove', event => {
+      if (!drag || event.pointerId !== drag.id) return;
+      const dx = event.clientX - drag.x;
+      if (Math.abs(dx) > 5) drag.moved = true;
+      if (drag.moved) track.scrollLeft = drag.start - dx;
+    });
+    function release(event) {
+      if (!drag || event.pointerId !== drag.id) return;
+      const moved = drag.moved;
+      drag = null;
+      track.classList.remove('is-dragging');
+      if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+      if (moved) {
+        track.dataset.justDragged = 'true';
+        setTimeout(() => delete track.dataset.justDragged, 120);
+        scrollToCard(activeIndex());
+      }
+    }
+    track.addEventListener('pointerup', release);
+    track.addEventListener('pointercancel', release);
+    track.addEventListener('click', event => {
+      if (!track.dataset.justDragged) return;
+      event.preventDefault(); event.stopPropagation();
+    }, true);
+    window.addEventListener('resize', syncSoon);
+    sync();
+  }
 
-    track.addEventListener('scroll', updateControls, { passive: true });
-    window.addEventListener('resize', updateControls);
-    updateControls();
+  // Календарь: 3D Coverflow из IDEAL / Спортивное питание.
+  // Удалены зависимости от товаров, корзины и карточек магазина.
+  function initCompetitionsCoverflow() {
+    const section = document.querySelector('.competitions-preview');
+    const gallery = section?.querySelector('[data-competitions-gallery]');
+    const cards = [...(section?.querySelectorAll('[data-competition-card]') || [])];
+    const prev = section?.querySelector('[data-competitions-prev]');
+    const next = section?.querySelector('[data-competitions-next]');
+    const counter = section?.querySelector('[data-competitions-counter]');
+    if (!gallery || cards.length < 2 || !prev || !next) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const count = cards.length;
+    const modulo = value => ((value % count) + count) % count;
+    const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+    let position = 0, target = 0, frame = 0, cardWidth = 0, pointer = null, suppressClick = false;
+    const stepWidth = () => cardWidth * (gallery.clientWidth <= 680 ? 0.63 : 0.77);
+    const opacityAt = distance => distance <= 1 ? 1 - distance * 0.10 : Math.max(0.26, 0.90 - (distance - 1) * 0.52);
+
+    function render() {
+      cards.forEach((card, index) => {
+        const offset = modulo(index - position + count / 2) - count / 2;
+        const d = Math.abs(offset);
+        const spread = d <= 1 ? d : 1 + (d - 1) * 0.75;
+        const x = Math.sign(offset) * spread * stepWidth();
+        const scale = 1 - Math.min(d, 2.5) * 0.15;
+        const angle = -Math.sign(offset) * Math.min(d, 1) * 19;
+        card.style.transform = `translate(-50%, -50%) translate3d(${x.toFixed(2)}px, ${(d * 11).toFixed(2)}px, ${(-d * 52).toFixed(2)}px) rotateY(${angle.toFixed(2)}deg) scale(${scale.toFixed(4)})`;
+        card.style.opacity = String(opacityAt(d));
+        card.style.zIndex = String(100 - Math.round(d * 30));
+        const selected = index === modulo(Math.round(target));
+        card.setAttribute('aria-hidden', String(!selected));
+        card.classList.toggle('is-current', selected);
+      });
+    }
+    function sync() {
+      const active = modulo(Math.round(target));
+      if (counter) counter.textContent = `${String(active + 1).padStart(2, '0')} / ${String(count).padStart(2, '0')}`;
+    }
+    function goTo(nextPosition) {
+      cancelAnimationFrame(frame);
+      const from = position;
+      target = nextPosition;
+      sync();
+      if (reduced.matches) {position = target; render(); return;}
+      const start = performance.now();
+      function animate(now) {
+        const t = Math.min((now - start) / 1080, 1);
+        position = from + (target - from) * (1 - Math.pow(1 - t, 4));
+        render();
+        if (t < 1) frame = requestAnimationFrame(animate);
+        else {position = target = modulo(target); frame = 0; render();}
+      }
+      frame = requestAnimationFrame(animate);
+    }
+    const step = delta => {if (!pointer) goTo(Math.round(target) + delta);};
+    prev.addEventListener('click', () => step(-1));
+    next.addEventListener('click', () => step(1));
+    gallery.addEventListener('keydown', event => {
+      if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+      event.preventDefault();
+      if (event.key === 'Home' || event.key === 'End') goTo(Math.round(position) + (event.key === 'Home' ? -modulo(Math.round(target)) : count - 1 - modulo(Math.round(target))));
+      else step(event.key === 'ArrowRight' ? 1 : -1);
+    });
+    gallery.addEventListener('dragstart', event => event.preventDefault());
+    gallery.addEventListener('pointerdown', event => {
+      if (!event.isPrimary || (event.pointerType === 'mouse' && event.button !== 0)) return;
+      cancelAnimationFrame(frame);
+      pointer = {id:event.pointerId, x:event.clientX, y:event.clientY, origin:position, lastX:event.clientX, lastTime:performance.now(), velocity:0, locked:false};
+      suppressClick = false;
+      if (event.pointerType === 'mouse') gallery.setPointerCapture(event.pointerId);
+    });
+    gallery.addEventListener('pointermove', event => {
+      if (!pointer || event.pointerId !== pointer.id) return;
+      const dx = event.clientX - pointer.x, dy = event.clientY - pointer.y;
+      if (!pointer.locked) {
+        if (Math.abs(dy) > 9 && Math.abs(dy) > Math.abs(dx)) {release(event,true); return;}
+        if (Math.abs(dx) < 7 || Math.abs(dx) < Math.abs(dy)) return;
+        pointer.locked = true;
+        suppressClick = true;
+        gallery.setPointerCapture(event.pointerId);
+        gallery.classList.add('is-dragging');
+      }
+      if (event.cancelable) event.preventDefault();
+      const now=performance.now(), elapsed=now-pointer.lastTime;
+      if (elapsed > 0) pointer.velocity=.35*pointer.velocity+.65*(event.clientX-pointer.lastX)/elapsed;
+      pointer.lastX=event.clientX; pointer.lastTime=now;
+      position=pointer.origin-dx/stepWidth();
+      render();
+    }, {passive:false});
+    function release(event, cancelled=false) {
+      if (!pointer || event.pointerId !== pointer.id) return;
+      const drag = pointer; pointer=null;
+      gallery.classList.remove('is-dragging');
+      if (gallery.hasPointerCapture(event.pointerId)) gallery.releasePointerCapture(event.pointerId);
+      if (!drag.locked || cancelled) {goTo(Math.round(target)); return;}
+      const dx=event.clientX-drag.x;
+      const velocity=performance.now()-drag.lastTime<110?drag.velocity:0;
+      let nextIndex=Math.round(position-clamp(velocity*125/stepWidth(),-1,1));
+      if (nextIndex===Math.round(drag.origin) && (Math.abs(dx)>cardWidth*.16 || Math.abs(velocity)>.35)) nextIndex+=dx<0?1:-1;
+      goTo(nextIndex);
+    }
+    gallery.addEventListener('pointerup', event=>release(event));
+    gallery.addEventListener('pointercancel', event=>release(event,true));
+    gallery.addEventListener('lostpointercapture', event=>{if(event.target===gallery&&pointer)release(event,true);});
+    gallery.addEventListener('click', event=>{
+      if(suppressClick){suppressClick=false;return;}
+      const card=event.target.closest('[data-competition-card]');
+      if(!card)return;
+      const offset=modulo(cards.indexOf(card)-position+count/2)-count/2;
+      if(Math.abs(offset)>.1)goTo(Math.round(position+offset));
+    });
+    const resize=()=>{cardWidth=cards[0].offsetWidth;render();};
+    if('ResizeObserver' in window)new ResizeObserver(resize).observe(gallery);
+    else window.addEventListener('resize',resize,{passive:true});
+    reduced.addEventListener('change',()=>{cancelAnimationFrame(frame);position=target;render();});
+    resize();sync();
   }
 
 
@@ -190,28 +348,35 @@
   function initHallOfFameFlow() {
     const wrapper = document.querySelector('[data-hall-flow]');
     const hall = wrapper?.querySelector('.hall-of-fame');
-    if (!wrapper || !hall) return;
+    const calendar = wrapper?.querySelector('.competitions-preview');
+    if (!wrapper || !hall || !calendar) return;
 
     const light = [251, 250, 248];
     const dark = [8, 13, 22];
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const clamp = (value) => Math.min(1, Math.max(0, value));
+    const clamp = (value) => Math.max(0, Math.min(1, value));
     const smooth = (value) => value * value * (3 - 2 * value);
     let queued = false;
 
     function update() {
-      const top = hall.getBoundingClientRect().top;
       const vh = window.innerHeight;
-      // Переход начинается, когда Зал славы приближается снизу,
-      // и заканчивается уже внутри секции. Участок длиной ~1 viewport.
-      const progress = reducedMotion.matches
-        ? (top < vh * .45 ? 1 : 0)
-        : smooth(clamp((vh * .95 - top) / (vh * 1.05)));
-      const rgb = light.map((value, i) => Math.round(value + (dark[i] - value) * progress));
+      const hallRect = hall.getBoundingClientRect();
+      const calendarRect = calendar.getBoundingClientRect();
+
+      // Светлый -> тёмный перед Залом славы.
+      const enter = smooth(clamp((vh * .96 - hallRect.top) / (vh * 1.05)));
+      // Тёмный -> светлый при входе в календарь; без маски/градиента на стыке.
+      const exit = smooth(clamp((vh * .97 - calendarRect.top) / (vh * .83)));
+      const darkness = enter * (1 - exit);
+      const rgb = light.map((value, i) => Math.round(value + (dark[i] - value) * darkness));
 
       wrapper.style.setProperty('--hall-flow-bg', `rgb(${rgb.join(', ')})`);
-      wrapper.style.setProperty('--hall-photo-opacity', String(smooth(clamp((progress - .18) / .82))));
-      wrapper.style.setProperty('--hall-content-opacity', String(smooth(clamp((progress - .36) / .64))));
+
+      // Фото не должно обрываться у нижней границы Зала славы.
+      const photoExit = smooth(clamp((vh * .65 - hallRect.bottom) / (vh * .55)));
+      wrapper.style.setProperty('--hall-photo-opacity', String(smooth(clamp((enter - .18) / .82)) * (1 - photoExit)));
+      wrapper.style.setProperty('--hall-content-opacity', String(smooth(clamp((enter - .36) / .64)) * (1 - photoExit)));
+      wrapper.style.setProperty('--calendar-content-opacity', String(smooth(clamp((exit - .28) / .60))));
       queued = false;
     }
 
@@ -220,7 +385,6 @@
       queued = true;
       requestAnimationFrame(update);
     }
-
     update();
     window.addEventListener('scroll', scheduleUpdate, { passive: true });
     window.addEventListener('resize', scheduleUpdate);
@@ -236,6 +400,7 @@
     initCountdown();
     initAchievements();
     initAthletesCarousel();
+    initCompetitionsCoverflow();
     initHallOfFameFlow();
   });
 })();

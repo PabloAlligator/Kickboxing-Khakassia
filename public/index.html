@@ -8,7 +8,7 @@
     <title>Федерация кикбоксинга Республики Хакасия — официальный сайт</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/site/css/main.min.css?v=hall-flow-2">
   </head>
 
@@ -197,13 +197,14 @@
                 <div class="home-feed__athletes-actions">
                   <a class="home-feed__all-link home-feed__all-link--athletes" href="/athletes.html">Все спортсмены</a>
                   <div class="home-feed__controls" aria-label="Управление каруселью спортсменов">
+                    <span class="home-feed__counter" data-athletes-counter aria-live="polite">01 / 05</span>
                     <button class="home-feed__control" type="button" data-athletes-prev>Назад</button>
                     <button class="home-feed__control" type="button" data-athletes-next>Вперёд</button>
                   </div>
                 </div>
               </div>
 
-              <div class="home-feed__athletes-track" data-athletes-track tabindex="0" aria-label="Карточки спортсменов">
+              <div class="home-feed__athletes-track" data-athletes-track tabindex="0" role="region" aria-roledescription="карусель" aria-label="Карточки спортсменов: перетаскивайте для прокрутки">
                 <article class="athlete-card">
                   <a class="athlete-card__photo" href="/athlete.html" aria-label="Открыть профиль спортсмена 01">
                     <span class="athlete-card__number">01</span>
@@ -294,10 +295,79 @@
           </div>
         </div>
       </section>
+
+      <!-- Календарь: все даты и названия пока демонстрационные -->
+      <section class="competitions-preview" id="competitions" aria-labelledby="competitions-title">
+        <div class="container">
+          <div class="competitions-preview__heading">
+            <div>
+              <span class="competitions-preview__eyebrow">Ближайшие события</span>
+              <h2 class="competitions-preview__title" id="competitions-title">Календарь соревнований</h2>
+            </div>
+            <a class="competitions-preview__all" href="/public/competitions.html">Все соревнования <span aria-hidden="true">→</span></a>
+          </div>
+          <p class="competitions-preview__disclaimer">Демонстрационный календарь. Даты, места и названия будут заменены после подтверждения федерацией.</p>
+          <div class="competitions-preview__gallery" data-competitions-gallery tabindex="0" role="region" aria-roledescription="карусель" aria-label="Турниры: листайте клавишами или перетаскиванием">
+            <div class="competitions-preview__stage">
+            <article class="competition-card" data-competition-card>
+              <div class="competition-card__top">
+                <div class="competition-card__date"><strong>25–27</strong><span>мая</span></div>
+                <div class="competition-card__info"><h3>Открытое первенство Республики Хакасия</h3><p>Абакан · место уточняется</p></div>
+              </div>
+              <span class="competition-card__category">Региональные</span>
+            </article>
+            <article class="competition-card" data-competition-card>
+              <div class="competition-card__top">
+                <div class="competition-card__date competition-card__date--red"><strong>10–12</strong><span>июня</span></div>
+                <div class="competition-card__info"><h3>Чемпионат Сибирского федерального округа</h3><p>Город уточняется</p></div>
+              </div>
+              <span class="competition-card__category competition-card__category--red">Федеральные</span>
+            </article>
+            <article class="competition-card" data-competition-card>
+              <div class="competition-card__top">
+                <div class="competition-card__date"><strong>01–05</strong><span>июля</span></div>
+                <div class="competition-card__info"><h3>Кубок России по кикбоксингу</h3><p>Город уточняется</p></div>
+              </div>
+              <span class="competition-card__category">Всероссийские</span>
+            </article>
+            <article class="competition-card" data-competition-card>
+              <div class="competition-card__top">
+                <div class="competition-card__date competition-card__date--red"><strong>15–20</strong><span>августа</span></div>
+                <div class="competition-card__info"><h3>Международный турнир по кикбоксингу</h3><p>Место уточняется</p></div>
+              </div>
+              <span class="competition-card__category competition-card__category--red">Международные</span>
+            </article>
+            </div>
+          </div>
+          <div class="competitions-preview__navigation">
+            <span class="competitions-preview__hint">Перетаскивай, чтобы выбрать</span>
+            <div class="competitions-preview__controls">
+              <button type="button" data-competitions-prev aria-label="Предыдущий турнир">Назад</button>
+              <span data-competitions-counter aria-live="polite">01 / 04</span>
+              <button type="button" data-competitions-next aria-label="Следующий турнир">Далее</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Последний блок главной — приглашаем в клубы Федерации -->
+      <section class="family-cta" id="clubs" aria-labelledby="family-cta-title">
+        <div class="family-cta__visual" aria-hidden="true">
+          <img src="/site/img/family-team.webp" alt="" loading="lazy" decoding="async" width="2200" height="750">
+        </div>
+        <div class="container family-cta__container">
+          <div class="family-cta__content">
+            <span class="family-cta__eyebrow">Федерация кикбоксинга Хакасии</span>
+            <h2 class="family-cta__title" id="family-cta-title">Стань частью<br>нашей семьи</h2>
+            <p class="family-cta__description">Кикбоксинг — это не только спорт.<br>Это характер, дисциплина и команда.<br>Присоединяйтесь к нашей федерации!</p>
+            <a class="family-cta__button" href="/public/clubs.html">Найти свой клуб</a>
+          </div>
+        </div>
+      </section>
       </div>
     </main>
 
     <footer class="footer" id="site-footer"></footer>
-    <script src="/site/scripts/main.js?v=hall-flow-2"></script>
+    <script src="/site/scripts/main.js?v=family-1"></script>
   </body>
 </html>
