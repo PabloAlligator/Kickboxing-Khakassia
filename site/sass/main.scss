@@ -1,7 +1,7 @@
-@use "./base/base";
-@use "./base/variables" as v;
-@use "./components/header";
-@use "./components/footer";
+@use './base/base';
+@use './base/variables' as v;
+@use './components/header';
+@use './components/footer';
 
 // Главная страница. Уникальные стили Hero — только здесь.
 .hero {
@@ -827,3 +827,123 @@
     flex-basis: min(76vw, 250px);
   }
 }
+
+
+// Единая поверхность новостей и Зала славы, как в Estetic Club.
+.hall-flow {
+  --hall-flow-bg: rgb(251, 250, 248);
+  --hall-photo-opacity: 0;
+  --hall-content-opacity: 0;
+  position: relative;
+  background-color: var(--hall-flow-bg);
+  isolation: isolate;
+
+  .home-feed { background: transparent; }
+}
+
+// Только фотоколлаж и контент; цвет меняется у родительской .hall-flow.
+.hall-of-fame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: max(840px, 120svh);
+  overflow: hidden;
+  color: #fff;
+  background: transparent;
+
+  &__scene {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: url('/site/img/hall-of-fame-bg.png') center / cover no-repeat;
+    opacity: var(--hall-photo-opacity);
+  }
+
+  &__container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: inherit;
+    padding-top: clamp(175px, 22vh, 290px);
+    padding-bottom: clamp(175px, 22vh, 290px);
+  }
+
+  &__content {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    opacity: var(--hall-content-opacity);
+    transform: translateY(calc((1 - var(--hall-content-opacity)) * 24px));
+  }
+
+  &__eyebrow {
+    display: block;
+    margin-bottom: 18px;
+    color: rgba(255,255,255,.82);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: v.$font-display;
+    font-weight: 700;
+    line-height: .98;
+    letter-spacing: -.035em;
+    text-transform: uppercase;
+    text-shadow: 0 3px 30px rgba(0,0,0,.5);
+    span { display: block; font-size: clamp(68px, 9.2vw, 164px); }
+    small { display: block; margin-top: 10px; font-size: clamp(29px, 4.6vw, 72px); font-weight: 600; }
+  }
+
+  &__description {
+    max-width: 560px;
+    margin: 27px auto 34px;
+    color: rgba(255,255,255,.86);
+    font-size: clamp(14px,1.05vw,17px);
+    line-height: 1.65;
+  }
+
+  &__button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 54px;
+    padding: 15px 32px;
+    background: v.$color-red;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background .5s ease, transform .5s ease;
+    &:hover { background: v.$color-red-hover; transform: translateY(-3px); }
+    &:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+  }
+
+  @media (max-width: v.$breakpoint-tablet) {
+    min-height: 830px;
+    &__container { padding-top: 155px; padding-bottom: 155px; }
+    &__title span { font-size: clamp(62px,10vw,120px); }
+    &__title small { font-size: clamp(28px,5vw,54px); }
+  }
+  @media (max-width: v.$breakpoint-mobile) {
+    min-height: 760px;
+    &__scene { background-position: center; }
+    &__container { padding-top: 140px; padding-bottom: 140px; }
+    &__title span { font-size: clamp(54px,13vw,92px); }
+    &__title small { font-size: clamp(28px,7vw,44px); }
+    &__eyebrow { font-size: 10px; }
+    &__description { max-width: 350px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    &__content { transform: none; }
+    &__button { transition: none; }
+  }
+}
+ 

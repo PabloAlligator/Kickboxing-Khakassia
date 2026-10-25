@@ -9,12 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/site/css/main.min.css" />
-    <script src="/site/scripts/home.js" defer></script>
+    <link rel="stylesheet" href="/site/css/main.min.css?v=hall-flow-2">
   </head>
 
   <body>
-    <header class="header" id="site-header"></header>
+    <div id="site-header" data-include="/components/header.html"></div>
 
     <main class="main">
       <section class="hero" aria-labelledby="hero-title">
@@ -140,7 +139,8 @@
         </div>
       </section>
 
-      <section class="home-feed" aria-labelledby="home-feed-athletes-title">
+      <div class="hall-flow" data-hall-flow>
+      <section class="home-feed" id="news" aria-labelledby="home-feed-athletes-title">
         <div class="container">
           <div class="home-feed__layout">
             <div class="home-feed__news">
@@ -263,8 +263,41 @@
           </div>
         </div>
       </section>
+
+      <!-- Зал славы: исторические фотографии добавляются после согласования -->
+      <section class="hall-of-fame" id="hall-of-fame" aria-labelledby="hall-of-fame-title">
+        <div class="hall-of-fame__scene" aria-hidden="true">
+          <!-- <div class="hall-of-fame__archive hall-of-fame__archive--left">
+            <div class="hall-of-fame__photo hall-of-fame__photo--one"><span>Архив федерации</span></div>
+            <div class="hall-of-fame__photo hall-of-fame__photo--two"><span>История побед</span></div>
+            <div class="hall-of-fame__photo hall-of-fame__photo--three"><span>Чемпионы Хакасии</span></div>
+          </div>
+          <div class="hall-of-fame__archive hall-of-fame__archive--right">
+            <div class="hall-of-fame__photo hall-of-fame__photo--four"><span>Спортсмены</span></div>
+            <div class="hall-of-fame__photo hall-of-fame__photo--five"><span>Поколения</span></div>
+            <div class="hall-of-fame__photo hall-of-fame__photo--six"><span>Тренеры</span></div>
+          </div> -->
+        </div>
+
+        <div class="container hall-of-fame__container">
+          <div class="hall-of-fame__content">
+            <span class="hall-of-fame__eyebrow">Они создавали историю</span>
+            <h2 class="hall-of-fame__title" id="hall-of-fame-title">
+              <span>Зал славы</span>
+              <small>Кикбоксинга Хакасии</small>
+            </h2>
+            <p class="hall-of-fame__description">
+              Имена, титулы и судьбы тех, кто прославил нашу республику
+              на рингах России, Европы и всего мира.
+            </p>
+            <a class="hall-of-fame__button" href="/public/hall-of-fame.html">Перейти в Зал славы</a>
+          </div>
+        </div>
+      </section>
+      </div>
     </main>
 
     <footer class="footer" id="site-footer"></footer>
+    <script src="/site/scripts/main.js?v=hall-flow-2"></script>
   </body>
 </html>

@@ -1,25 +1,39 @@
-<div class="header__inner">
-  <a class="header__brand" href="/" aria-label="Федерация кикбоксинга Республики Хакасия — на главную">
-    <span class="header__mark" aria-hidden="true">К</span>
-    <span>Федерация кикбоксинга<br />Республики Хакасия</span>
-  </a>
-
-  <button
-    class="header__toggle"
-    type="button"
-    aria-controls="site-navigation"
-    aria-expanded="false"
-    aria-label="Открыть меню"
-  >
-    <span></span><span></span><span></span>
-  </button>
-
-  <nav class="header__nav" id="site-navigation" aria-label="Основная навигация">
-    <a class="header__link" href="/federation.html">О федерации</a>
-    <a class="header__link" href="/competitions.html">Соревнования</a>
-    <a class="header__link" href="/athletes.html">Спортсмены</a>
-    <a class="header__link" href="/coaches.html">Тренеры</a>
-    <a class="header__link" href="/hall-of-fame.html">Зал славы</a>
-    <a class="header__account" href="/admin-pages/login.html">Личный кабинет</a>
-  </nav>
-</div>
+<header class="header" id="site-header">
+  <div class="container header__container">
+    <div class="header__inner">
+      <a class="header__brand" href="/public/index.html" aria-label="Федерация кикбоксинга Хакасии — на главную">
+        <img class="header__logo" src="/site/img/logo-fed.png" alt="" />
+        <span class="header__brand-text"><strong>Федерация</strong><strong>кикбоксинга</strong><small>Республики Хакасия</small></span>
+      </a>
+      <nav class="header__nav" aria-label="Основная навигация">
+        <a href="/public/federation.html">О федерации</a>
+        <a href="/public/index.html#news">Новости</a>
+        <a href="/public/competitions.html">Соревнования</a>
+        <a href="/public/athletes.html">Спортсмены</a>
+        <a href="/public/coaches.html">Тренеры</a>
+        <a href="/public/hall-of-fame.html">Зал славы</a>
+        <a href="/public/media.html">Медиа</a>
+        <a href="/public/contacts.html">Контакты</a>
+      </nav>
+      <button class="header__burger" type="button" aria-label="Открыть меню" aria-controls="mobile-menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu__inner">
+      <span class="mobile-menu__label">Официальный сайт Федерации</span>
+      <nav class="mobile-menu__nav" aria-label="Мобильная навигация">
+            <a href="/public/federation.html">О федерации</a>
+            <a href="/public/index.html#news">Новости</a>
+            <a href="/public/competitions.html">Соревнования</a>
+            <a href="/public/athletes.html">Спортсмены</a>
+            <a href="/public/coaches.html">Тренеры</a>
+            <a href="/public/hall-of-fame.html">Зал славы</a>
+            <a href="/public/media.html">Медиа</a>
+            <a href="/public/contacts.html">Контакты</a>
+      </nav>
+      <p class="mobile-menu__bottom">Федерация кикбоксинга Республики Хакасия</p>
+    </div>
+  </div>
+</header>
