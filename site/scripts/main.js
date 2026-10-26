@@ -8,7 +8,9 @@
     try {
       const response = await fetch(url, { cache: 'no-store' });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      target.innerHTML = await response.text();
+      // Компонент заменяет mount-point: не оставляем вложенные header/footer и повторяющиеся ID.
+      target.insertAdjacentHTML('beforebegin', await response.text());
+      target.remove();
     } catch (error) {
       console.warn(`Не удалось загрузить компонент ${url}:`, error);
     }

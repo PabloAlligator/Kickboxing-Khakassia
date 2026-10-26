@@ -1,0 +1,613 @@
+@use './base/base';
+@use './base/variables' as v;
+@use './components/header';
+@use './components/footer';
+
+// Hero «Зал славы»: одно широкое полотно на десктопе.
+// Отдельный кадр того же полотна на планшетах и смартфонах.
+.hall-page {
+  background: v.$color-background;
+}
+
+.hall-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100svh;
+  background: v.$color-background;
+  color: v.$color-navy;
+
+  &__visual {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    background: url('/site/img/hall-fame-hero.webp') center center / cover no-repeat;
+    pointer-events: none;
+  }
+
+  // Мягкое осветление зоны заголовка. Не затрагивает другие секции.
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background: linear-gradient(90deg,
+      rgba(251, 250, 248, .92) 0%,
+      rgba(251, 250, 248, .68) 22%,
+      rgba(251, 250, 248, .18) 42%,
+      transparent 55%);
+    pointer-events: none;
+  }
+
+  &__container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    padding-top: clamp(148px, 18vh, 205px);
+    padding-bottom: clamp(20px, 3.5vh, 40px);
+  }
+
+  &__content {
+    width: min(650px, 47%);
+    padding-top: clamp(0px, 3vh, 48px);
+  }
+
+  &__eyebrow {
+    display: block;
+    margin-bottom: 16px;
+    color: v.$color-muted;
+    font: 700 clamp(10px, .85vw, 12px)/1.3 v.$font-body;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: v.$font-display;
+    font-size: clamp(48px, 5.15vw, 94px);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -.025em;
+    text-transform: uppercase;
+    > span { display: block; white-space: nowrap; }
+  }
+
+  &__accent { color: v.$color-red; }
+
+  &__title-small {
+    margin-top: 7px;
+    font-size: .56em;
+    letter-spacing: -.015em;
+  }
+
+  &__description {
+    max-width: 370px;
+    margin: 22px 0 0;
+    color: #525a68;
+    font: 400 clamp(13px, 1.05vw, 16px)/1.55 v.$font-body;
+  }
+
+  &__nav {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    min-height: 96px;
+    margin-top: auto;
+    overflow: hidden;
+    border: 1px solid rgba(188, 32, 43, .45);
+    border-radius: 14px;
+    background: rgba(251, 250, 248, .94);
+    box-shadow: 0 14px 50px rgba(17, 29, 55, .16);
+    backdrop-filter: blur(15px);
+  }
+
+  &__nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 17px;
+    min-width: 0;
+    padding: 16px 18px;
+    color: v.$color-navy;
+    transition: background-color v.$duration-normal v.$ease-smooth;
+    &:not(:last-child) { border-right: 1px solid v.$color-border; }
+    strong { display: block; font: 600 clamp(19px, 1.8vw, 27px)/1.15 v.$font-display; text-transform: uppercase; }
+    small { display: block; margin-top: 3px; font: 400 11px/1.35 v.$font-body; }
+    &--active {
+      background: v.$color-red;
+      color: #fff;
+      &:hover { background: v.$color-red-hover; }
+    }
+    &--inactive { cursor: default; }
+  }
+
+  &__nav-icon { width: 43px; height: 43px; flex: 0 0 43px; }
+
+  @media (max-width: 1180px) {
+    &__content { width: min(585px, 55%); }
+    &__title { font-size: clamp(46px, 5.9vw, 73px); }
+    &__visual { background-position: 46% center; }
+    &::before {
+      background: linear-gradient(90deg, #fbfaf8 0%, rgba(251,250,248,.90) 30%, rgba(251,250,248,.20) 65%, transparent 100%);
+    }
+  }
+
+  @media (max-width: 767px) {
+    min-height: 100svh;
+
+    &__container {
+      min-height: 100svh;
+      padding-top: 122px;
+      padding-bottom: 18px;
+    }
+    &__content { width: 100%; max-width: 570px; padding-top: 0; }
+    &__eyebrow { font-size: 10px; margin-bottom: 10px; }
+    &__title { font-size: clamp(40px, 8.5vw, 63px); line-height: 1.06; }
+    &__title > span { white-space: normal; }
+    &__title-small { font-size: .52em; }
+    &__description { max-width: 415px; margin-top: 13px; font-size: 13px; }
+
+    &__visual {
+      top: clamp(265px, 35svh, 340px);
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: url('/site/img/hall-fame-hero-mobile.webp');
+      background-position: center 48%;
+      background-size: cover;
+    }
+    &::before {
+      background: linear-gradient(180deg,
+        #fbfaf8 0%,
+        #fbfaf8 35%,
+        rgba(251,250,248,.75) 45%,
+        transparent 64%);
+    }
+    &__nav { min-height: 80px; border-radius: 12px; margin-top: auto; }
+    &__nav-item { flex-direction: column; gap: 5px; padding: 12px 4px; text-align: center; }
+    &__nav-icon { width: 27px; height: 27px; flex-basis: 27px; }
+    &__nav-item strong { font-size: clamp(13px, 3.65vw, 19px); }
+    &__nav-item small { font-size: 9px; }
+  }
+
+  @media (max-width: 380px) {
+    &__container { padding-top: 110px; }
+    &__title { font-size: clamp(35px, 10vw, 39px); }
+    &__description { font-size: 12px; }
+    &__nav-icon { width: 24px; height: 24px; flex-basis: 24px; }
+    &__nav-item small { font-size: 8px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__nav-item { transition: none; }
+  }
+}
+
+// Этап 04: Легенды — 4 равноправные статичные карточки.
+// Код добавляется в конец site/sass/hall.scss (там уже есть @use ... as v).
+.hall-legends {
+  padding: clamp(56px, 6vw, 100px) 0 clamp(76px, 8vw, 128px);
+  color: v.$color-navy;
+  background: v.$color-background;
+  scroll-margin-top: 110px;
+
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+    margin-bottom: 12px;
+  }
+
+  &__eyebrow {
+    display: block;
+    margin-bottom: 11px;
+    color: v.$color-muted;
+    font: 700 11px/1.3 v.$font-body;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+    font: 700 clamp(28px, 2.8vw, 48px)/1.12 v.$font-display;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  &__all {
+    flex: 0 0 auto;
+    color: v.$color-muted;
+    font: 600 13px/1.4 v.$font-body;
+  }
+
+  &__notice {
+    margin: 0 0 28px;
+    color: v.$color-muted;
+    font: 400 12px/1.6 v.$font-body;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(14px, 1.5vw, 26px);
+  }
+
+  @media (max-width: 1024px) {
+    &__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    &__heading {
+      align-items: start;
+    }
+    &__title {
+      font-size: clamp(26px, 7.5vw, 37px);
+    }
+    &__all {
+      display: none;
+    }
+    &__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+  }
+}
+
+.hall-legend {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 12px 12px 22px;
+  border: 1px solid #e2e3e5;
+  background: #fff;
+  position: relative;
+  cursor: pointer;
+  isolation: isolate;
+
+  &__link {
+    position: absolute;
+    z-index: 10;
+    inset: 0;
+    display: block;
+    border-radius: inherit;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 3px solid #bc202b;
+      outline-offset: 5px;
+    }
+  }
+
+  &__photo {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1 / 1.02;
+    border: 1px dashed #c5ccd6;
+    background: #f2f3f5;
+    color: #7a8290;
+    font: 500 12px/1.4 v.$font-body;
+    text-align: center;
+      img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  }
+
+  &__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    text-align: center;
+  }
+
+  &__index {
+    margin-bottom: 8px;
+    color: v.$color-red;
+    font: 700 11px/1.3 v.$font-body;
+    letter-spacing: 0.1em;
+  }
+
+  &__name {
+    margin: 0;
+    font: 600 clamp(21px, 1.8vw, 29px)/1.16 v.$font-display;
+    text-transform: uppercase;
+  }
+
+  &__description {
+    margin: 10px 0 18px;
+    color: #677080;
+    font: 400 clamp(11px, 0.86vw, 13px)/1.5 v.$font-body;
+  }
+
+  &__tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: 100%;
+    margin-top: auto;
+
+    span {
+      padding: 7px 9px;
+      border: 1px solid #e9eaed;
+      color: #5e6676;
+      font: 600 10px/1.2 v.$font-body;
+    }
+  }
+
+  @media (max-width: 600px) {
+    &__photo {
+      aspect-ratio: 1 / 0.9;
+    }
+    &__name {
+      font-size: 26px;
+    }
+    &__description {
+      font-size: 13px;
+    }
+  }
+}
+
+
+// Hover легенд: карточка выходит на передний план, снимок плавно меняется.
+// Второе изображение будет доступно по /pankova2.png после добавления файла.
+.hall-legend {
+  position: relative;
+  z-index: 0;
+  transform: translateZ(0) scale(1) rotate(0deg);
+  transform-origin: center center;
+  transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+  will-change: auto;
+
+  &__photo {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('/site/img/natasha2.png') center top / cover no-repeat;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      z-index: 3;
+      transform: translateY(-12px) scale(1.075) rotate(-1.8deg);
+      border-color: rgba(194, 149, 65, 0.7);
+      box-shadow: 0 30px 65px rgba(10, 18, 35, 0.26), 0 8px 20px rgba(10, 18, 35, 0.13);
+
+      .hall-legend__photo::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    &__photo::after { transition: none; }
+  }
+}
+
+// Легенды: скруглённые карточки, полноформатное фото и живой золотой кант.
+.hall-legend {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 18px;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(115deg, #93651b, #ffe7a0, #c18a2d, #fff3c9, #986517) border-box;
+  background-size: 100% 100%, 250% 250%;
+  animation: hall-legend-gold-shimmer 6s ease-in-out infinite alternate;
+
+  &__photo {
+    width: 100%;
+    border: 0;
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    &::after { background-image: url('/site/img/natasha2.png'); }
+  }
+
+  &__body { padding: 20px 18px 24px; }
+
+  &__link { border-radius: inherit; }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: transparent;
+      box-shadow: 0 30px 70px rgba(8, 13, 22, .24), 0 0 28px rgba(210, 157, 57, .23);
+    }
+  }
+  &:focus-within {
+    z-index: 3;
+    box-shadow: 0 14px 45px rgba(8, 13, 22, .18), 0 0 22px rgba(210, 157, 57, .2);
+  }
+}
+
+@keyframes hall-legend-gold-shimmer {
+  0% { background-position: 0 0, 0% 50%; }
+  100% { background-position: 0 0, 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hall-legend { animation: none; }
+}
+
+
+
+
+// Строго 2 карточки в ряд на смартфонах; без горизонтального переполнения.
+.hall-legends {
+  @media (max-width: 600px) {
+    padding-top: 52px;
+    &__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    &__title { font-size: clamp(25px, 6vw, 36px); }
+  }
+}
+.hall-legend {
+  @media (max-width: 600px) {
+    border-radius: 12px;
+    &__photo { aspect-ratio: 3 / 4; border-radius: 10px 10px 0 0; }
+    &__body { padding: 12px 8px 14px; }
+    &__index { font-size: 9px; margin-bottom: 5px; }
+    &__name { font-size: clamp(16px, 4.2vw, 21px); overflow-wrap: anywhere; }
+    &__description { font-size: 10px; line-height: 1.45; margin: 8px 0 12px; }
+    &__tags { gap: 4px; }
+    &__tags span { font-size: 9px; padding: 5px 6px; }
+  }
+  @media (max-width: 380px) {
+    &__body { padding-inline: 6px; }
+    &__name { font-size: 16px; }
+    &__description { font-size: 9px; }
+  }
+}
+@media (hover: hover) and (pointer: fine) and (max-width: 767px) {
+  .hall-legend:hover { transform: translateY(-5px) scale(1.015) rotate(-.4deg); }
+}
+
+
+// Финальная секция «Архив побед». Плавная смена ОБЩЕЙ поверхности по скроллу,
+// как на главной: без белых масок и без жёсткой границы между секциями.
+.hall-page-flow {
+  --hall-page-bg: rgb(251, 250, 248);
+  --hall-archive-image-opacity: 0;
+  --hall-archive-content-opacity: 0;
+  position: relative;
+  isolation: isolate;
+  background-color: var(--hall-page-bg);
+
+  .hall-legends {
+    background: transparent;
+  }
+}
+
+.hall-archive {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: clamp(490px, 48vw, 660px);
+  width: 100%;
+  overflow: hidden;
+  scroll-margin-top: 88px;
+  color: #fff;
+  background: transparent;
+
+  &__scene {
+    position: absolute;
+    inset: 0;
+    background: url('/site/img/hall-archive.webp') center center / cover no-repeat;
+    opacity: var(--hall-archive-image-opacity);
+    pointer-events: none;
+
+    // Только затемнение фото ради контраста, НЕ маска смены фона.
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(8, 15, 28, .92) 0%, rgba(8, 15, 28, .70) 37%, rgba(8, 15, 28, .12) 100%);
+    }
+  }
+
+  &__container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    min-height: inherit;
+    padding-top: clamp(90px, 9vw, 135px);
+    padding-bottom: clamp(90px, 9vw, 135px);
+  }
+
+  &__content {
+    max-width: 680px;
+    opacity: var(--hall-archive-content-opacity);
+    transform: translateY(calc((1 - var(--hall-archive-content-opacity)) * 18px));
+  }
+
+  &__eyebrow {
+    display: block;
+    margin-bottom: 18px;
+    color: rgba(255, 255, 255, .8);
+    font: 700 12px/1.4 v.$font-body;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+    color: #fff;
+    font: 700 clamp(62px, 7.1vw, 122px)/1.02 v.$font-display;
+    letter-spacing: -.03em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  &__description {
+    max-width: 540px;
+    margin: 24px 0 30px;
+    color: rgba(255, 255, 255, .88);
+    font: 400 clamp(13px, 1.06vw, 16px)/1.7 v.$font-body;
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+    padding: 15px 30px;
+    border-radius: 6px;
+    background: v.$color-red;
+    color: #fff;
+    font: 700 12px/1.2 v.$font-body;
+    text-transform: uppercase;
+    cursor: default; // Страница архивов будет реализована позже.
+    opacity: .87;
+  }
+
+  @media (max-width: 767px) {
+    min-height: 500px;
+
+    &__scene {
+      background-image: url('/site/img/hall-archive-mobile.webp');
+      background-position: center center;
+
+      &::after {
+        background: linear-gradient(90deg, rgba(8, 15, 28, .93), rgba(8, 15, 28, .49));
+      }
+    }
+
+    &__container { padding-top: 90px; padding-bottom: 90px; }
+    &__title { font-size: clamp(52px, 12.8vw, 83px); }
+    &__description { font-size: 13px; max-width: 420px; }
+    &__eyebrow { font-size: 10px; }
+    &__button { min-height: 50px; padding: 14px 24px; }
+  }
+
+  @media (max-width: 380px) {
+    &__title { font-size: 48px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__content { transform: none; }
+  }
+}
