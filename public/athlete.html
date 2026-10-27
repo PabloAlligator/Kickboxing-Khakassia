@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a1425" />
+    <meta
+      name="description"
+      content="Личная страница спортсмена Федерации кикбоксинга Республики Хакасия. Демонстрационный макет профиля."
+    />
+    <title>Профиль спортсмена — Федерация кикбоксинга Республики Хакасия</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/site/css/athlete.min.css" />
+  </head>
+  <body class="athlete-page">
+    <div id="site-header"></div>
+    <main class="main">
+      <section class="profile-hero" aria-labelledby="profile-hero-title">
+        <div class="profile-hero__ambient" aria-hidden="true"></div>
+        <div class="profile-hero__photo" aria-hidden="true">
+          <img
+            src="/site/img/athlete-demo-hero.webp"
+            alt=""
+            width="1100"
+            height="1400"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="container profile-hero__inner">
+          <nav
+            class="profile-hero__breadcrumbs"
+            aria-label="Навигационная цепочка"
+          >
+            <a href="/public/index.html">Главная</a
+            ><span aria-hidden="true">/</span>
+            <a href="/public/hall-of-fame.html">Зал славы</a
+            ><span aria-hidden="true">/</span>
+            <span aria-current="page">Профиль спортсмена</span>
+          </nav>
+          <div class="profile-hero__content">
+            <span class="profile-hero__eyebrow"
+              ><span class="profile-hero__eyebrow-dot"></span> Демонстрационный
+              профиль</span
+            >
+            <h1 class="profile-hero__title" id="profile-hero-title">
+              <span>Анна</span><span class="profile-hero__gold">Иванова</span>
+            </h1>
+            <div class="profile-hero__rank">
+              <span class="profile-hero__flag" aria-hidden="true">🇷🇺</span
+              ><strong>Спортивное звание уточняется</strong>
+            </div>
+            <p class="profile-hero__discipline">
+              Кикбоксинг <span aria-hidden="true">·</span> Республика Хакасия
+            </p>
+            <dl class="profile-hero__facts">
+              <div>
+                <dt>Клуб</dt>
+                <dd>Уточняется</dd>
+              </div>
+              <div>
+                <dt>Тренер</dt>
+                <dd>Уточняется</dd>
+              </div>
+              <div>
+                <dt>Город</dt>
+                <dd>Абакан</dd>
+              </div>
+            </dl>
+            <blockquote class="profile-hero__quote">
+              «Здесь будет личная цитата спортсмена — о характере, спорте и
+              дороге к победам».
+            </blockquote>
+          </div>
+          <div class="profile-hero__bottom">
+            <span>Сила. Характер. История.</span
+            ><a href="#athlete-story"
+              >Узнать историю <span aria-hidden="true">↓</span></a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-awards" aria-labelledby="profile-awards-title">
+        <div class="container profile-awards__inner">
+          <div class="profile-section-head profile-awards__intro">
+            <span class="profile-section-head__eyebrow">Путь к вершинам</span>
+            <h2 class="profile-section-head__title" id="profile-awards-title">
+              Главные<br />достижения
+            </h2>
+            <span class="profile-section-head__line" aria-hidden="true"></span>
+            <p>
+              Здесь появятся официально подтверждённые результаты спортсмена.
+            </p>
+          </div>
+          <div class="profile-awards__cards">
+            <article class="profile-award">
+              <span class="profile-award__icon" aria-hidden="true">★</span
+              ><span class="profile-award__kicker">01</span>
+              <h3>Звание<br />спортсмена</h3>
+              <p>Подтверждается</p>
+            </article>
+            <article class="profile-award">
+              <span class="profile-award__icon" aria-hidden="true">✦</span
+              ><span class="profile-award__kicker">02</span>
+              <h3>Главная<br />победа</h3>
+              <p>Уточняется</p>
+            </article>
+            <article class="profile-award">
+              <span class="profile-award__icon" aria-hidden="true">◈</span
+              ><span class="profile-award__kicker">03</span>
+              <h3>Международный<br />результат</h3>
+              <p>Уточняется</p>
+            </article>
+            <article class="profile-award">
+              <span class="profile-award__icon" aria-hidden="true">♛</span
+              ><span class="profile-award__kicker">04</span>
+              <h3>Личный<br />рекорд</h3>
+              <p>Уточняется</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="profile-story"
+        id="athlete-story"
+        aria-labelledby="profile-story-title"
+      >
+        <div class="profile-story__image" aria-hidden="true">
+          <img
+            src="/site/img/athlete-demo-portrait.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            width="910"
+            height="1150"
+          />
+        </div>
+        <div class="container profile-story__inner">
+          <div class="profile-story__spacer" aria-hidden="true"></div>
+          <div class="profile-story__copy">
+            <span class="profile-section-head__eyebrow"
+              >История человека за медалями</span
+            >
+            <h2 id="profile-story-title">Моя история</h2>
+            <span class="profile-section-head__line" aria-hidden="true"></span>
+            <p>
+              Это место для рассказа спортсмена от первого лица. Как я впервые
+              пришла в зал, почему осталась в кикбоксинге и что мне дали
+              тренировки.
+            </p>
+            <p>
+              Здесь можно поделиться историей самой важной победы, рассказать о
+              сложных соревнованиях и людях, которые поддерживали меня на этом
+              пути.
+            </p>
+            <p>
+              После интервью Федерация добавит настоящие слова спортсмена — без
+              выдуманных цитат и событий.
+            </p>
+                <p>
+              Это место для рассказа спортсмена от первого лица. Как я впервые
+              пришла в зал, почему осталась в кикбоксинге и что мне дали
+              тренировки.
+            </p>
+            <p>
+              Здесь можно поделиться историей самой важной победы, рассказать о
+              сложных соревнованиях и людях, которые поддерживали меня на этом
+              пути.
+            </p>
+            <p>
+              После интервью Федерация добавит настоящие слова спортсмена — без
+              выдуманных цитат и событий.
+            </p>
+                <p>
+              Это место для рассказа спортсмена от первого лица. Как я впервые
+              пришла в зал, почему осталась в кикбоксинге и что мне дали
+              тренировки.
+            </p>
+            <p>
+              Здесь можно поделиться историей самой важной победы, рассказать о
+              сложных соревнованиях и людях, которые поддерживали меня на этом
+              пути.
+            </p>
+            <p>
+              После интервью Федерация добавит настоящие слова спортсмена — без
+              выдуманных цитат и событий.
+            </p>
+                <p>
+              Это место для рассказа спортсмена от первого лица. Как я впервые
+              пришла в зал, почему осталась в кикбоксинге и что мне дали
+              тренировки.
+            </p>
+            <p>
+              Здесь можно поделиться историей самой важной победы, рассказать о
+              сложных соревнованиях и людях, которые поддерживали меня на этом
+              пути.
+            </p>
+            <p>
+              После интервью Федерация добавит настоящие слова спортсмена — без
+              выдуманных цитат и событий.
+            </p>
+          </div>
+          <blockquote class="profile-story__quote">
+            <span aria-hidden="true">“</span>Здесь появятся настоящие слова
+            спортсмена о его пути к победам.<small
+              >Место для личной цитаты</small
+            >
+          </blockquote>
+        </div>
+      </section>
+
+      <section class="profile-journey" aria-labelledby="profile-journey-title">
+        <div class="container profile-journey__inner">
+          <div class="profile-section-head profile-journey__intro">
+            <span class="profile-section-head__eyebrow"
+              >С чего всё начиналось</span
+            >
+            <h2 class="profile-section-head__title" id="profile-journey-title">
+              Спортивный<br />путь
+            </h2>
+            <span class="profile-section-head__line" aria-hidden="true"></span>
+            <p>
+              Ключевые этапы карьеры. Точные даты и факты добавим после
+              согласования.
+            </p>
+          </div>
+          <ol class="profile-journey__timeline">
+            <li>
+              <span class="profile-journey__year">Этап 01</span>
+              <div>
+                <h3>Первая тренировка</h3>
+                <p>Начало знакомства с кикбоксингом</p>
+              </div>
+            </li>
+            <li>
+              <span class="profile-journey__year">Этап 02</span>
+              <div>
+                <h3>Первые соревнования</h3>
+                <p>Первый выход на спортивный ринг</p>
+              </div>
+            </li>
+            <li>
+              <span class="profile-journey__year">Этап 03</span>
+              <div>
+                <h3>Важная победа</h3>
+                <p>Первый значимый спортивный результат</p>
+              </div>
+            </li>
+            <li>
+              <span class="profile-journey__year">Этап 04</span>
+              <div>
+                <h3>Новый уровень</h3>
+                <p>Рост мастерства и новые цели</p>
+              </div>
+            </li>
+            <li>
+              <span class="profile-journey__year">Сегодня</span>
+              <div>
+                <h3>Продолжение истории</h3>
+                <p>Новые вершины впереди</p>
+              </div>
+            </li>
+          </ol>
+          <div class="profile-journey__art" aria-hidden="true">
+            <img
+              src="/site/img/athlete-demo-training.webp"
+              alt=""
+              width="950"
+              height="850"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="profile-gallery"
+        id="athlete-gallery"
+        aria-labelledby="profile-gallery-title"
+      >
+        <div class="container">
+          <div class="profile-gallery__heading">
+            <div class="profile-section-head">
+              <span class="profile-section-head__eyebrow"
+                >Моменты, которые остаются</span
+              >
+              <h2
+                class="profile-section-head__title"
+                id="profile-gallery-title"
+              >
+                Фото и видео
+              </h2>
+              <span
+                class="profile-section-head__line"
+                aria-hidden="true"
+              ></span>
+              <p>Жизнь в спорте — в фотографиях, кадрах и воспоминаниях.</p>
+            </div>
+            <span class="profile-gallery__hint"
+              >Нажми на фото, чтобы открыть</span
+            >
+          </div>
+          <div
+            class="profile-gallery__filters"
+            role="group"
+            aria-label="Фильтры галереи"
+          >
+            <button
+              type="button"
+              data-gallery-filter="all"
+              aria-pressed="true"
+              class="is-active"
+            >
+              Все
+            </button>
+            <button
+              type="button"
+              data-gallery-filter="competition"
+              aria-pressed="false"
+            >
+              Соревнования
+            </button>
+            <button
+              type="button"
+              data-gallery-filter="training"
+              aria-pressed="false"
+            >
+              Тренировки
+            </button>
+            <button
+              type="button"
+              data-gallery-filter="awards"
+              aria-pressed="false"
+            >
+              Награждения
+            </button>
+            <button
+              type="button"
+              data-gallery-filter="video"
+              aria-pressed="false"
+            >
+              Видео
+            </button>
+          </div>
+          <div class="profile-gallery__grid" data-gallery-grid>
+            <button
+              type="button"
+              class="profile-gallery__item profile-gallery__item--wide"
+              data-media-type="image"
+              data-gallery-category="competition"
+              data-full="/site/img/athlete-demo-action.webp"
+              data-caption="Соревнования · демонстрационная фотография"
+              aria-label="Открыть фото: соревнования"
+            >
+              <img
+                src="/site/img/athlete-demo-action.webp"
+                alt="Спортсменка в красных перчатках во время соревнований"
+                width="1120"
+                height="1100"
+                loading="lazy"
+                decoding="async"
+              /><span class="profile-gallery__item-label">Соревнования</span
+              ><span class="profile-gallery__zoom" aria-hidden="true">+</span>
+            </button>
+            <button
+              type="button"
+              class="profile-gallery__item profile-gallery__item--wide"
+              data-media-type="image"
+              data-gallery-category="awards"
+              data-full="/site/img/athlete-demo-portrait-wide.webp"
+              data-caption="Награды · демонстрационная фотография"
+              aria-label="Открыть фото: награды"
+            >
+              <img
+                src="/site/img/athlete-demo-portrait-wide.webp"
+                alt="Спортсменка с чемпионским поясом"
+                width="1200"
+                height="780"
+                loading="lazy"
+                decoding="async"
+              /><span class="profile-gallery__item-label">Награды</span
+              ><span class="profile-gallery__zoom" aria-hidden="true">+</span>
+            </button>
+            <button
+              type="button"
+              class="profile-gallery__item"
+              data-media-type="image"
+              data-gallery-category="competition"
+              data-full="/site/img/athlete-demo-action-vertical.webp"
+              data-caption="На ринге · демонстрационная фотография"
+              aria-label="Открыть фото: на ринге"
+            >
+              <img
+                src="/site/img/athlete-demo-action-vertical.webp"
+                alt="Спортсменка в боевой стойке"
+                width="900"
+                height="1200"
+                loading="lazy"
+                decoding="async"
+              /><span class="profile-gallery__item-label">На ринге</span
+              ><span class="profile-gallery__zoom" aria-hidden="true">+</span>
+            </button>
+            <button
+              type="button"
+              class="profile-gallery__item"
+              data-media-type="image"
+              data-gallery-category="awards"
+              data-full="/site/img/athlete-demo-portrait.webp"
+              data-caption="Награждение · демонстрационная фотография"
+              aria-label="Открыть фото: награждение"
+            >
+              <img
+                src="/site/img/athlete-demo-portrait.webp"
+                alt="Спортсменка с поясом и наградой"
+                width="910"
+                height="1150"
+                loading="lazy"
+                decoding="async"
+              /><span class="profile-gallery__item-label">Награждение</span
+              ><span class="profile-gallery__zoom" aria-hidden="true">+</span>
+            </button>
+            <button
+              type="button"
+              class="profile-gallery__item"
+              data-media-type="image"
+              data-gallery-category="training"
+              data-full="/site/img/athlete-demo-training.webp"
+              data-caption="Тренировки · демонстрационная фотография"
+              aria-label="Открыть фото: тренировка"
+            >
+              <img
+                src="/site/img/athlete-demo-training.webp"
+                alt="Тренировочный момент на ринге"
+                width="950"
+                height="850"
+                loading="lazy"
+                decoding="async"
+              /><span class="profile-gallery__item-label">Тренировка</span
+              ><span class="profile-gallery__zoom" aria-hidden="true">+</span>
+            </button>
+            <button
+              type="button"
+              class="profile-gallery__item"
+              data-media-type="image"
+              data-gallery-category="awards"
+              data-full="/site/img/athlete-demo-archive.webp"
+              data-caption="Архив · демонстрационная фотография"
+              aria-label="Открыть фото: архив"
+            >
+              <img
+                src="/site/img/athlete-demo-archive.webp"
+                alt="Архивное фото спортсменки с поясом"
+                width="800"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              /><span class="profile-gallery__item-label">Архив</span
+              ><span class="profile-gallery__zoom" aria-hidden="true">+</span>
+            </button>
+            <button
+              type="button"
+              class="profile-gallery__item profile-gallery__item--extra"
+              data-media-type="image"
+              data-gallery-category="competition"
+              data-full="/site/img/athlete-demo-team.webp"
+              data-caption="Командная фотография · архив Федерации"
+              aria-label="Открыть фото: команда"
+            >
+              <img
+                src="/site/img/athlete-demo-team.webp"
+                alt="Командная фотография Федерации на турнире"
+                width="1350"
+                height="780"
+                loading="lazy"
+                decoding="async"
+              /><span class="profile-gallery__item-label">Команда</span
+              ><span class="profile-gallery__zoom" aria-hidden="true">+</span>
+            </button>
+            <button
+              type="button"
+              class="profile-gallery__item profile-gallery__item--extra"
+              data-media-type="image"
+              data-gallery-category="training"
+              data-full="/site/img/athlete-demo-action.webp"
+              data-caption="Тренировочный момент · демонстрационная фотография"
+              aria-label="Открыть фото: спортивный момент"
+            >
+              <img
+                src="/site/img/athlete-demo-action.webp"
+                alt="Спортсменка в перчатках"
+                width="1120"
+                height="1100"
+                loading="lazy"
+                decoding="async"
+              /><span class="profile-gallery__item-label"
+                >Спортивный момент</span
+              ><span class="profile-gallery__zoom" aria-hidden="true">+</span>
+            </button>
+            <button
+              type="button"
+              class="profile-gallery__item profile-gallery__item--extra"
+              data-media-type="image"
+              data-gallery-category="awards"
+              data-full="/site/img/athlete-demo-portrait-wide.webp"
+              data-caption="Чемпионский пояс · демонстрационная фотография"
+              aria-label="Открыть фото: чемпионский пояс"
+            >
+              <img
+                src="/site/img/athlete-demo-portrait-wide.webp"
+                alt="Спортсменка с чемпионским поясом"
+                width="1200"
+                height="780"
+                loading="lazy"
+                decoding="async"
+              /><span class="profile-gallery__item-label">Чемпионский пояс</span
+              ><span class="profile-gallery__zoom" aria-hidden="true">+</span>
+            </button>
+          </div>
+          <p class="profile-gallery__empty" data-gallery-empty hidden>
+            Видеозаписи пока не добавлены. После загрузки в админ-панели они
+            появятся здесь.
+          </p>
+          <div class="profile-gallery__more-wrap">
+            <button
+              class="profile-gallery__more"
+              data-gallery-more
+              type="button"
+            >
+              Показать ещё фото <span aria-hidden="true">+</span>
+            </button>
+          </div>
+          <p class="profile-gallery__disclaimer">
+            Все изображения и сведения на этой странице используются для
+            проверки макета. При публикации необходимо подтвердить
+            принадлежность фотографий и достижения спортсмена.
+          </p>
+        </div>
+      </section>
+    </main>
+    <div id="site-footer"></div>
+
+    <div
+      class="profile-lightbox"
+      data-lightbox
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Просмотр фотографий"
+      tabindex="-1"
+      hidden
+    >
+      <div class="profile-lightbox__backdrop" data-lightbox-close></div>
+      <div class="profile-lightbox__dialog">
+        <div class="profile-lightbox__top">
+          <span
+            class="profile-lightbox__counter"
+            data-lightbox-counter
+            aria-live="polite"
+            >01 / 01</span
+          >
+          <button
+            class="profile-lightbox__close"
+            type="button"
+            data-lightbox-close
+            aria-label="Закрыть просмотр"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="profile-lightbox__stage" data-lightbox-stage>
+          <button
+            class="profile-lightbox__nav profile-lightbox__nav--prev"
+            type="button"
+            data-lightbox-prev
+            aria-label="Предыдущее фото"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="m15 5-7 7 7 7" />
+            </svg>
+          </button>
+          <div class="profile-lightbox__media" data-lightbox-media></div>
+          <button
+            class="profile-lightbox__nav profile-lightbox__nav--next"
+            type="button"
+            data-lightbox-next
+            aria-label="Следующее фото"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="m9 5 7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+        <p class="profile-lightbox__caption" data-lightbox-caption></p>
+        <span class="profile-lightbox__hint"
+          >Листайте свайпом или стрелками клавиатуры</span
+        >
+      </div>
+    </div>
+    <script src="/site/scripts/main.js"></script>
+    <script src="/site/scripts/athlete.js"></script>
+  </body>
+</html>
