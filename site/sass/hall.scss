@@ -611,3 +611,43 @@
     &__content { transform: none; }
   }
 }
+
+/* Этап 05: SPA разделы Зала славы. Легенды не изменяются. */
+.hall-page-flow{transition:background-color .55s ease}
+.hall-page-flow[data-current="archive"]{--hall-page-bg:#080f1c;--hall-archive-image-opacity:1;--hall-archive-content-opacity:1}
+.hall-page-flow[data-enhanced] [data-hall-panel][hidden]{display:none}
+.hall-hero__nav-item:focus-visible{outline:3px solid #bc202b;outline-offset:-4px}
+.hall-people{padding:clamp(60px,6vw,105px) 0 clamp(86px,8vw,140px);scroll-margin-top:90px;color:#111d37}
+.hall-people__top,.coaches-people__top{display:flex;align-items:end;justify-content:space-between;gap:35px;margin-bottom:26px}
+.hall-people__top>div,.coaches-people__top>div{min-width:0}
+.hall-people__eyebrow,.coaches-people__eyebrow{display:block;margin-bottom:13px;color:#bc202b;font:700 11px/1.4 "Inter",sans-serif;letter-spacing:.13em;text-transform:uppercase}
+.hall-people__top h2,.coaches-people__top h2{margin:0;font:600 clamp(35px,3.5vw,63px)/1.09 "Oswald",sans-serif;text-transform:uppercase}
+.hall-people__top p,.coaches-people__top p{max-width:420px;margin:0;color:#697383;font:400 14px/1.65 "Inter",sans-serif}
+.hall-people__notice,.coaches-people__notice{margin:0 0 28px;border-left:3px solid #bc202b;background:#f0f0ef;padding:12px 16px;color:#687485;font:400 12px/1.6 "Inter",sans-serif}
+.hall-people__grid,.coaches-people__grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(12px,1.5vw,25px)}
+.heritage-card,.coach-card{min-width:0}
+.heritage-card__photo,.coach-card__photo{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;aspect-ratio:4/5;border-radius:9px;background:linear-gradient(150deg,#304458 0%,#1c2f45 53%,#0d1b31 100%);color:#e0e5ed;transition:transform .4s ease,box-shadow .4s ease}
+.heritage-card:nth-child(5n+2) .heritage-card__photo,.coach-card:nth-child(5n+2) .coach-card__photo{background:linear-gradient(150deg,#293e54,#17263c)}
+.heritage-card:nth-child(5n+3) .heritage-card__photo,.coach-card:nth-child(5n+3) .coach-card__photo{background:linear-gradient(150deg,#3b4a5a,#19344a)}
+.heritage-card:nth-child(5n+4) .heritage-card__photo,.coach-card:nth-child(5n+4) .coach-card__photo{background:linear-gradient(150deg,#2e3e51,#1a2d3e)}
+.heritage-card:nth-child(5n+5) .heritage-card__photo,.coach-card:nth-child(5n+5) .coach-card__photo{background:linear-gradient(150deg,#3b4656,#101f35)}
+.heritage-card__photo::before,.coach-card__photo::before{content:"";position:absolute;inset:13px;border:1px solid rgba(255,255,255,.14);border-radius:3px}
+.heritage-card__photo::after,.coach-card__photo::after{content:"ФХ";position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);font:600 clamp(68px,6vw,125px)/1 "Oswald",sans-serif;color:rgba(255,255,255,.06);pointer-events:none}
+.heritage-card__num,.coach-card__num{position:absolute;left:23px;top:22px;font:500 13px/1 "Oswald",sans-serif;letter-spacing:.1em;color:rgba(255,255,255,.68)}
+.heritage-card__placeholder,.coach-card__placeholder{z-index:1;position:relative;margin-top:26px;text-align:center;font:700 10px/1.5 "Inter",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.heritage-card__details,.coach-card__details{padding:15px 0 0}
+.heritage-card__details h3,.coach-card__details h3{margin:0 0 7px;font:500 clamp(17px,1.3vw,24px)/1.3 "Oswald",sans-serif;color:#111d37;text-transform:uppercase}
+.heritage-card__details p,.coach-card__details p{margin:0;color:#707986;font:400 11px/1.55 "Inter",sans-serif}
+@media (hover:hover) and (pointer:fine){.heritage-card:hover .heritage-card__photo,.coach-card:hover .coach-card__photo{transform:translateY(-5px);box-shadow:0 17px 34px rgba(16,35,56,.16)}}
+.hall-archive-photos{padding:50px 0 105px;color:#fff;background:transparent}
+.hall-archive-photos__title span{display:block;margin-bottom:13px;color:#e66b79;font:700 11px/1.4 "Inter",sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.hall-archive-photos__title h2{margin:0 0 15px;font:600 clamp(34px,3.6vw,61px)/1.12 "Oswald",sans-serif;text-transform:uppercase}
+.hall-archive-photos__title p{margin:0 0 35px;color:#b8c6d4;font:400 13px/1.7 "Inter",sans-serif}
+.hall-archive-photos__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:25px}
+.hall-archive-photos__grid figure{min-width:0;margin:0}
+.hall-archive-photos__grid img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:9px}
+.hall-archive-photos__grid figcaption{margin-top:12px;color:#bdc7d1;font:400 12px/1.5 "Inter",sans-serif}
+@media(max-width:1150px){.hall-people__grid,.coaches-people__grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:850px){.hall-people__grid,.coaches-people__grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hall-people__top,.coaches-people__top{align-items:start;flex-direction:column;gap:12px}}
+@media(max-width:600px){.hall-people__grid,.coaches-people__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}.hall-people__top h2,.coaches-people__top h2{font-size:35px}.heritage-card__details h3,.coach-card__details h3{font-size:17px}.heritage-card__details p,.coach-card__details p{font-size:10px}.heritage-card__placeholder,.coach-card__placeholder{font-size:9px}.hall-archive-photos__grid{grid-template-columns:1fr;gap:30px}}
+@media(prefers-reduced-motion:reduce){.hall-page-flow,.heritage-card__photo,.coach-card__photo{transition:none}}

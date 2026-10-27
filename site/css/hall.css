@@ -402,6 +402,310 @@ body.lock {
     transition: none;
   }
 }
+/* Общий поиск Федерации: Header + модальное окно. */
+.header__search {
+  display: inline-flex;
+  flex: 0 0 42px;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.29);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.header__search:hover,
+.header__search[aria-expanded=true] {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.63);
+}
+
+.header__search:active {
+  transform: scale(0.98);
+}
+
+.header__search:focus-visible,
+.site-search__close:focus-visible,
+.site-search__field:focus-within,
+.site-search__result:focus-visible {
+  outline: 2px solid #f04b5b;
+  outline-offset: 3px;
+}
+
+.site-search[hidden] {
+  display: none;
+}
+
+.site-search {
+  position: fixed;
+  z-index: 2200;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: min(14vh, 130px) 18px 22px;
+  pointer-events: auto;
+}
+
+.site-search__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 12, 24, 0.79);
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+}
+
+.site-search__dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(730px, 100%);
+  max-height: calc(100dvh - min(14vh, 130px) - 22px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: clamp(20px, 3vw, 36px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  background: #fdfcfb;
+  color: #13213b;
+  box-shadow: 0 35px 110px rgba(0, 0, 0, 0.32);
+}
+
+.site-search__top {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.site-search__eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: #c6283e;
+  font: 700 10px/1.4 "Inter", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.site-search__title {
+  margin: 0;
+  font: 600 clamp(29px, 4vw, 44px)/1.07 "Oswald", sans-serif;
+  text-transform: uppercase;
+}
+
+.site-search__close {
+  display: inline-flex;
+  flex: 0 0 40px;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid #d4d9e0;
+  border-radius: 9px;
+  background: #fff;
+  color: #15223a;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.site-search__close:hover {
+  background: #f1f3f6;
+}
+
+.site-search__close:active {
+  transform: scale(0.98);
+}
+
+.site-search__form {
+  margin-top: 26px;
+}
+
+.site-search__label {
+  display: block;
+  margin-bottom: 9px;
+  color: #4e5b6d;
+  font: 600 12px/1.3 "Inter", sans-serif;
+}
+
+.site-search__field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 57px;
+  padding: 0 17px;
+  border: 1px solid #b9c0cb;
+  border-radius: 10px;
+  background: #fff;
+  color: #657387;
+  transition: border-color 0.2s ease;
+}
+
+.site-search__field:focus-within {
+  border-color: #c6283e;
+}
+
+.site-search__field svg {
+  flex: 0 0 auto;
+}
+
+.site-search__field input {
+  width: 100%;
+  min-width: 0;
+  height: 53px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #15223a;
+  font: 500 16px/1.4 "Inter", sans-serif;
+}
+
+.site-search__field input::placeholder {
+  color: #8692a3;
+}
+
+.site-search__summary {
+  padding: 24px 0 9px;
+  color: #647185;
+  font: 700 11px/1.5 "Inter", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-search__results {
+  display: grid;
+  gap: 8px;
+}
+
+.site-search__result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-width: 0;
+  padding: 15px 17px;
+  border: 1px solid #e0e3e9;
+  border-radius: 10px;
+  background: #fff;
+  color: #17243b;
+  text-align: left;
+  text-decoration: none;
+  transition: background 0.22s ease, border-color 0.22s ease;
+}
+
+a.site-search__result:hover,
+a.site-search__result:focus-visible {
+  border-color: #c6283e;
+  background: #fff6f7;
+}
+
+.site-search__result--pending {
+  background: #f3f5f7;
+}
+
+.site-search__result-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.site-search__result-category {
+  color: #b82339;
+  font: 700 10px/1.3 "Inter", sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.site-search__result-title {
+  color: #17243b;
+  font: 600 clamp(17px, 2.2vw, 20px)/1.17 "Oswald", sans-serif;
+}
+
+.site-search__result-description {
+  color: #5d687a;
+  font: 400 12px/1.5 "Inter", sans-serif;
+}
+
+.site-search__result-action {
+  flex: 0 0 auto;
+  color: #c6283e;
+  font: 700 11px/1.4 "Inter", sans-serif;
+  white-space: nowrap;
+}
+
+.site-search__result--pending .site-search__result-action {
+  color: #6c7582;
+}
+
+.site-search__empty {
+  margin: 0;
+  padding: 20px;
+  border-radius: 10px;
+  background: #f2f4f7;
+  color: #5d687a;
+  font: 400 13px/1.6 "Inter", sans-serif;
+}
+
+.site-search__hint {
+  margin: 18px 0 0;
+  color: #777f8d;
+  font: 400 11px/1.55 "Inter", sans-serif;
+}
+
+body.site-search-open {
+  overflow: hidden;
+}
+
+@media (max-width: 1180px) {
+  .header__search {
+    margin-left: auto;
+  }
+}
+@media (max-width: 767px) {
+  .header__inner {
+    gap: 6px;
+  }
+  .header__search {
+    flex-basis: 36px;
+    width: 36px;
+    height: 40px;
+    border-color: transparent;
+    background: transparent;
+  }
+  .header__burger {
+    width: 38px;
+    height: 40px;
+  }
+  .site-search {
+    padding: 10px 10px 18px;
+  }
+  .site-search__dialog {
+    max-height: calc(100dvh - 20px);
+    padding: 20px 17px;
+    border-radius: 14px;
+  }
+  .site-search__form {
+    margin-top: 22px;
+  }
+  .site-search__result {
+    padding: 13px 11px;
+    gap: 10px;
+  }
+  .site-search__result-action {
+    font-size: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header__search, .site-search__close, .site-search__field, .site-search__result {
+    transition: none;
+  }
+}
 .footer {
   position: relative;
   width: 100%;
@@ -1354,5 +1658,269 @@ body.lock {
 @media (prefers-reduced-motion: reduce) {
   .hall-archive__content {
     transform: none;
+  }
+}
+
+/* Этап 05: SPA разделы Зала славы. Легенды не изменяются. */
+.hall-page-flow {
+  transition: background-color 0.55s ease;
+}
+
+.hall-page-flow[data-current=archive] {
+  --hall-page-bg:#080f1c;
+  --hall-archive-image-opacity:1;
+  --hall-archive-content-opacity:1;
+}
+
+.hall-page-flow[data-enhanced] [data-hall-panel][hidden] {
+  display: none;
+}
+
+.hall-hero__nav-item:focus-visible {
+  outline: 3px solid #bc202b;
+  outline-offset: -4px;
+}
+
+.hall-people {
+  padding: clamp(60px, 6vw, 105px) 0 clamp(86px, 8vw, 140px);
+  scroll-margin-top: 90px;
+  color: #111d37;
+}
+
+.hall-people__top, .coaches-people__top {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 35px;
+  margin-bottom: 26px;
+}
+
+.hall-people__top > div, .coaches-people__top > div {
+  min-width: 0;
+}
+
+.hall-people__eyebrow, .coaches-people__eyebrow {
+  display: block;
+  margin-bottom: 13px;
+  color: #bc202b;
+  font: 700 11px/1.4 "Inter", sans-serif;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.hall-people__top h2, .coaches-people__top h2 {
+  margin: 0;
+  font: 600 clamp(35px, 3.5vw, 63px)/1.09 "Oswald", sans-serif;
+  text-transform: uppercase;
+}
+
+.hall-people__top p, .coaches-people__top p {
+  max-width: 420px;
+  margin: 0;
+  color: #697383;
+  font: 400 14px/1.65 "Inter", sans-serif;
+}
+
+.hall-people__notice, .coaches-people__notice {
+  margin: 0 0 28px;
+  border-left: 3px solid #bc202b;
+  background: #f0f0ef;
+  padding: 12px 16px;
+  color: #687485;
+  font: 400 12px/1.6 "Inter", sans-serif;
+}
+
+.hall-people__grid, .coaches-people__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(12px, 1.5vw, 25px);
+}
+
+.heritage-card, .coach-card {
+  min-width: 0;
+}
+
+.heritage-card__photo, .coach-card__photo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  border-radius: 9px;
+  background: linear-gradient(150deg, #304458 0%, #1c2f45 53%, #0d1b31 100%);
+  color: #e0e5ed;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.heritage-card:nth-child(5n+2) .heritage-card__photo, .coach-card:nth-child(5n+2) .coach-card__photo {
+  background: linear-gradient(150deg, #293e54, #17263c);
+}
+
+.heritage-card:nth-child(5n+3) .heritage-card__photo, .coach-card:nth-child(5n+3) .coach-card__photo {
+  background: linear-gradient(150deg, #3b4a5a, #19344a);
+}
+
+.heritage-card:nth-child(5n+4) .heritage-card__photo, .coach-card:nth-child(5n+4) .coach-card__photo {
+  background: linear-gradient(150deg, #2e3e51, #1a2d3e);
+}
+
+.heritage-card:nth-child(5n+5) .heritage-card__photo, .coach-card:nth-child(5n+5) .coach-card__photo {
+  background: linear-gradient(150deg, #3b4656, #101f35);
+}
+
+.heritage-card__photo::before, .coach-card__photo::before {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 3px;
+}
+
+.heritage-card__photo::after, .coach-card__photo::after {
+  content: "ФХ";
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font: 600 clamp(68px, 6vw, 125px)/1 "Oswald", sans-serif;
+  color: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.heritage-card__num, .coach-card__num {
+  position: absolute;
+  left: 23px;
+  top: 22px;
+  font: 500 13px/1 "Oswald", sans-serif;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.heritage-card__placeholder, .coach-card__placeholder {
+  z-index: 1;
+  position: relative;
+  margin-top: 26px;
+  text-align: center;
+  font: 700 10px/1.5 "Inter", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.heritage-card__details, .coach-card__details {
+  padding: 15px 0 0;
+}
+
+.heritage-card__details h3, .coach-card__details h3 {
+  margin: 0 0 7px;
+  font: 500 clamp(17px, 1.3vw, 24px)/1.3 "Oswald", sans-serif;
+  color: #111d37;
+  text-transform: uppercase;
+}
+
+.heritage-card__details p, .coach-card__details p {
+  margin: 0;
+  color: #707986;
+  font: 400 11px/1.55 "Inter", sans-serif;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .heritage-card:hover .heritage-card__photo, .coach-card:hover .coach-card__photo {
+    transform: translateY(-5px);
+    box-shadow: 0 17px 34px rgba(16, 35, 56, 0.16);
+  }
+}
+.hall-archive-photos {
+  padding: 50px 0 105px;
+  color: #fff;
+  background: transparent;
+}
+
+.hall-archive-photos__title span {
+  display: block;
+  margin-bottom: 13px;
+  color: #e66b79;
+  font: 700 11px/1.4 "Inter", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hall-archive-photos__title h2 {
+  margin: 0 0 15px;
+  font: 600 clamp(34px, 3.6vw, 61px)/1.12 "Oswald", sans-serif;
+  text-transform: uppercase;
+}
+
+.hall-archive-photos__title p {
+  margin: 0 0 35px;
+  color: #b8c6d4;
+  font: 400 13px/1.7 "Inter", sans-serif;
+}
+
+.hall-archive-photos__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 25px;
+}
+
+.hall-archive-photos__grid figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.hall-archive-photos__grid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  border-radius: 9px;
+}
+
+.hall-archive-photos__grid figcaption {
+  margin-top: 12px;
+  color: #bdc7d1;
+  font: 400 12px/1.5 "Inter", sans-serif;
+}
+
+@media (max-width: 1150px) {
+  .hall-people__grid, .coaches-people__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 850px) {
+  .hall-people__grid, .coaches-people__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .hall-people__top, .coaches-people__top {
+    align-items: start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+@media (max-width: 600px) {
+  .hall-people__grid, .coaches-people__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 12px;
+  }
+  .hall-people__top h2, .coaches-people__top h2 {
+    font-size: 35px;
+  }
+  .heritage-card__details h3, .coach-card__details h3 {
+    font-size: 17px;
+  }
+  .heritage-card__details p, .coach-card__details p {
+    font-size: 10px;
+  }
+  .heritage-card__placeholder, .coach-card__placeholder {
+    font-size: 9px;
+  }
+  .hall-archive-photos__grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hall-page-flow, .heritage-card__photo, .coach-card__photo {
+    transition: none;
   }
 }

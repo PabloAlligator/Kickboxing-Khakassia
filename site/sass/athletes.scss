@@ -1,0 +1,152 @@
+@use './base/base';
+@use './base/variables' as v;
+@use './components/header';
+@use './components/footer';
+
+/* PAGE: INDEPENDENT CATALOG. The shared header/footer/base are compiled into every entrypoint. */
+.roster-hero { position:relative; isolation:isolate; overflow:hidden; min-height:660px; color:#fff; background:#101d34; }
+.roster-hero::before { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at 0% 82%,rgba(37,67,106,.66),transparent 43%),linear-gradient(122deg,rgba(255,255,255,.04),transparent 50%); }
+.roster-hero::after { content:""; position:absolute; width:680px; height:680px; right:-210px; top:-390px; border:1px solid rgba(255,255,255,.12); border-radius:50%; pointer-events:none; }
+.roster-hero__container { position:relative; z-index:1; display:flex; flex-direction:column; min-height:660px; padding-top:138px; }
+.roster-hero__breadcrumbs { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:17px; font-size:12px; color:rgba(255,255,255,.65); }
+.roster-hero__breadcrumbs a { color:inherit; transition:color .25s ease; }
+.roster-hero__breadcrumbs a:hover { color:#fff; }
+.roster-hero__layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.82fr); gap:clamp(32px,5vw,95px); align-items:center; flex:1; }
+.roster-hero__copy { position:relative; padding:38px 0 68px; z-index:2; }
+.roster-hero__eyebrow { display:flex; align-items:center; gap:12px; font-size:11px; font-weight:700; letter-spacing:.17em; text-transform:uppercase; color:#d3d9e4; }
+.roster-hero__line { flex:0 0 28px; height:3px; background:#e63242; }
+.roster-hero__title { display:flex; flex-direction:column; align-items:flex-start; margin:25px 0 26px; font:600 clamp(68px,6.8vw,132px)/.99 'Oswald',sans-serif; text-transform:uppercase; letter-spacing:-.025em; }
+.roster-hero__title span { color:#f13b4c; }
+.roster-hero__lead { max-width:540px; margin:0 0 32px; font-size:clamp(14px,1.1vw,17px); line-height:1.8; color:#c4cedc; }
+.roster-hero__button { display:inline-flex; align-items:center; gap:22px; min-height:52px; padding:12px 22px; border:1px solid rgba(255,255,255,.4); border-radius:7px; color:#fff; font-size:13px; font-weight:700; transition:background .28s ease,transform .28s ease,border-color .28s ease; }
+.roster-hero__button span { color:#ff6571; font-size:20px; line-height:1; }
+.roster-hero__button:hover { background:rgba(255,255,255,.12); border-color:#fff; }
+.roster-hero__button:active { transform:scale(.98); }
+.roster-hero__visual { position:relative; align-self:stretch; min-height:410px; margin-top:24px; display:flex; align-items:center; justify-content:center; }
+.roster-hero__visual::before { content:""; position:absolute; inset:10% 5% 3% 2%; border:1px solid rgba(255,255,255,.16); transform:translate(18px,17px); border-radius:11px; }
+.roster-hero__photo { position:absolute; inset:0 13% 3% 0; overflow:hidden; border-radius:11px; box-shadow:0 24px 70px rgba(0,0,0,.23); background:#34445d; }
+.roster-hero__photo::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,rgba(12,23,42,.36),transparent 45%); pointer-events:none; }
+.roster-hero__photo img { width:100%; height:100%; object-fit:cover; object-position:54% 30%; }
+.roster-hero__vertical { position:absolute; z-index:2; top:9%; right:4%; writing-mode:vertical-rl; font:600 10px/1.4 'Inter',sans-serif; letter-spacing:.22em; color:#ccd5e2; }
+.roster-hero__number { position:absolute; z-index:2; left:-25px; bottom:18px; font:600 86px/1 'Oswald',sans-serif; letter-spacing:-.08em; color:#fff; text-shadow:0 5px 20px rgba(0,0,0,.3); }
+.roster-hero__footer { display:flex; justify-content:space-between; gap:20px; padding:18px 0 21px; border-top:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.56); font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+
+.roster-section { padding:108px 0 120px; background:#fbfaf8; }
+.roster-section__heading { display:flex; align-items:end; justify-content:space-between; gap:40px; margin-bottom:31px; }
+.roster-section__heading > div { min-width:0; }
+.roster-section__kicker { display:block; margin-bottom:12px; font-size:11px; font-weight:800; letter-spacing:.15em; text-transform:uppercase; color:#bd2634; }
+.roster-section__heading h2 { margin:0; font:600 clamp(46px,4.4vw,78px)/1.08 'Oswald',sans-serif; text-transform:uppercase; letter-spacing:-.015em; color:#111e35; }
+.roster-section__heading p { max-width:420px; margin:0 0 5px; color:#6c7582; font-size:14px; line-height:1.75; }
+.roster-section__notice { display:flex; align-items:center; gap:13px; margin-bottom:28px; padding:15px 20px; background:#f1f2f3; border:1px solid #e3e6e9; border-radius:10px; color:#5c6574; }
+.roster-section__notice-icon { display:flex; align-items:center; justify-content:center; flex:0 0 23px; height:23px; border-radius:50%; background:#d5dce5; color:#203751; font-size:13px; font-weight:800; }
+.roster-section__notice p { margin:0; font-size:12px; line-height:1.6; }
+.roster-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; }
+.roster-card { display:flex; flex-direction:column; min-width:0; background:#fff; border:1px solid #e6e8ea; border-radius:14px; overflow:hidden; box-shadow:0 8px 28px rgba(20,37,61,.045); transition:transform .42s cubic-bezier(.22,1,.36,1),box-shadow .42s cubic-bezier(.22,1,.36,1),border-color .42s ease; }
+.roster-card:hover { transform:translateY(-6px); box-shadow:0 23px 55px rgba(20,37,61,.12); border-color:#d0d6dc; }
+.roster-card__media { position:relative; display:block; aspect-ratio:1.18 / 1; overflow:hidden; background:#172b45; }
+.roster-card__media img { width:100%; height:100%; object-fit:cover; object-position:50% 23%; transition:transform .6s cubic-bezier(.22,1,.36,1); }
+.roster-card:hover .roster-card__media img { transform:scale(1.045); }
+.roster-card__media--linked { cursor:pointer; }
+.roster-card__media--linked:focus-visible { outline-offset:-5px; }
+.roster-card__media:not(.roster-card__media--linked) img { object-position:center 36%; }
+.roster-card--tone-1 .roster-card__media { background:#142841; }
+.roster-card--tone-2 .roster-card__media { background:#2e4659; }
+.roster-card--tone-3 .roster-card__media { background:#283a50; }
+.roster-card--tone-2 .roster-card__media img { filter:sepia(.16) hue-rotate(153deg) saturate(.88); }
+.roster-card--tone-3 .roster-card__media img { filter:grayscale(.27) contrast(1.13); }
+.roster-card__serial { position:absolute; top:20px; left:20px; padding:8px 11px; border:1px solid rgba(255,255,255,.22); border-radius:5px; background:rgba(7,16,29,.38); backdrop-filter:blur(10px); color:#fff; font:600 12px/1 'Oswald',sans-serif; letter-spacing:.12em; }
+.roster-card__flag { position:absolute; bottom:18px; left:20px; padding:8px 11px; border-radius:5px; background:rgba(255,255,255,.92); color:#1b2f47; font-size:10px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
+.roster-card--sample .roster-card__flag { background:#bf2635; color:#fff; }
+.roster-card__info { display:flex; flex:1; flex-direction:column; align-items:flex-start; padding:29px 29px 27px; }
+.roster-card__eyebrow { display:block; margin-bottom:11px; font-size:10px; line-height:1.5; font-weight:800; color:#b82a3a; letter-spacing:.11em; text-transform:uppercase; }
+.roster-card__name { margin:0 0 11px; color:#13213a; font:600 clamp(26px,2.05vw,35px)/1.16 'Oswald',sans-serif; text-transform:uppercase; }
+.roster-card__name a { transition:color .25s ease; }
+.roster-card__name a:hover { color:#bd2634; }
+.roster-card__description { margin:0 0 26px; color:#6a7381; font-size:13px; line-height:1.75; }
+.roster-card__action,.roster-card__pending { display:flex; justify-content:space-between; align-items:center; align-self:stretch; gap:15px; margin-top:auto; padding-top:18px; border-top:1px solid #eceef0; color:#a4aab2; font-size:12px; font-weight:700; }
+.roster-card__action { color:#152d49; transition:color .24s ease; }
+.roster-card__action:hover { color:#be2333; }
+.roster-card__action span { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:6px; background:#f4ebec; color:#bd2634; font-size:25px; font-weight:400; line-height:1; }
+.roster-card__pending::before { content:""; width:7px; height:7px; flex:0 0 7px; border-radius:50%; background:#a1abb9; }
+
+.roster-outro { padding:0 0 105px; background:#fbfaf8; }
+.roster-outro__panel { position:relative; isolation:isolate; overflow:hidden; display:flex; align-items:center; justify-content:space-between; gap:55px; min-height:265px; padding:53px clamp(30px,6vw,90px); border-radius:15px; background:linear-gradient(115deg,#172d4b 0%,#0d1b31 77%); color:#fff; }
+.roster-outro__panel::before { content:""; position:absolute; inset:0 0 0 42%; z-index:-1; opacity:.55; background:repeating-linear-gradient(132deg,transparent 0 68px,rgba(255,255,255,.045) 69px 70px); }
+.roster-outro__mark { position:absolute; top:-135px; right:16%; font:700 370px/1 'Oswald',sans-serif; letter-spacing:-.1em; color:rgba(255,255,255,.027); pointer-events:none; }
+.roster-outro__body { max-width:655px; position:relative; }
+.roster-outro__eyebrow { display:block; margin-bottom:12px; color:#ff5b69; font-size:11px; font-weight:800; letter-spacing:.17em; text-transform:uppercase; }
+.roster-outro__body h2 { margin:0 0 12px; font:600 clamp(32px,3vw,53px)/1.15 'Oswald',sans-serif; text-transform:uppercase; }
+.roster-outro__body p { margin:0; color:#b7c5d5; font-size:13px; line-height:1.8; }
+.roster-outro__link { display:flex; align-items:center; justify-content:space-between; flex:0 0 230px; gap:20px; padding:16px 19px; border:1px solid rgba(255,255,255,.45); border-radius:7px; color:#fff; font-size:12px; font-weight:700; transition:background .3s ease,transform .3s ease; }
+.roster-outro__link span { color:#ff6977; font-size:25px; font-weight:400; line-height:1; }
+.roster-outro__link:hover { background:rgba(255,255,255,.09); }
+.roster-outro__link:active { transform:scale(.98); }
+
+@media (max-width:1280px) {
+  .roster-hero__title { font-size:clamp(58px,6.5vw,90px); }
+  .roster-hero__layout { gap:40px; }
+  .roster-hero__visual { min-height:380px; }
+  .roster-grid { gap:18px; }
+  .roster-card__info { padding:24px 22px; }
+}
+@media (max-width:1024px) {
+  .roster-hero,.roster-hero__container { min-height:630px; }
+  .roster-hero__layout { grid-template-columns:1fr .75fr; gap:28px; }
+  .roster-hero__title { font-size:clamp(56px,6.8vw,78px); }
+  .roster-hero__visual { min-height:320px; }
+  .roster-hero__vertical { font-size:8px; }
+  .roster-section { padding:78px 0 90px; }
+  .roster-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+  .roster-outro { padding-bottom:80px; }
+  .roster-outro__panel { gap:25px; padding:35px; }
+  .roster-outro__link { flex-basis:190px; }
+}
+@media (max-width:767px) {
+  .roster-hero,.roster-hero__container { min-height:0; }
+  .roster-hero__container { padding-top:114px; }
+  .roster-hero__breadcrumbs { font-size:11px; margin-bottom:5px; }
+  .roster-hero__layout { display:flex; flex-direction:column; align-items:stretch; gap:12px; }
+  .roster-hero__copy { padding:36px 0 10px; }
+  .roster-hero__eyebrow { font-size:9px; line-height:1.5; letter-spacing:.13em; }
+  .roster-hero__line { flex-basis:21px; }
+  .roster-hero__title { margin:17px 0 18px; font-size:clamp(51px,12vw,80px); line-height:1.02; }
+  .roster-hero__lead { max-width:530px; font-size:13px; margin-bottom:20px; }
+  .roster-hero__button { min-height:46px; padding:10px 16px; font-size:12px; }
+  .roster-hero__visual { height:clamp(270px,72vw,425px); min-height:0; margin:10px 0 14px; }
+  .roster-hero__photo { inset:0 11% 0 0; }
+  .roster-hero__number { left:9px; bottom:10px; font-size:62px; }
+  .roster-hero__vertical { right:1%; }
+  .roster-hero__footer { font-size:9px; letter-spacing:.06em; padding:15px 0 17px; }
+  .roster-section { padding:66px 0 75px; }
+  .roster-section__heading { display:block; margin-bottom:26px; }
+  .roster-section__heading h2 { font-size:clamp(40px,9vw,57px); }
+  .roster-section__heading p { margin:15px 0 0; font-size:13px; }
+  .roster-section__notice { padding:13px; align-items:flex-start; }
+  .roster-grid { gap:18px; }
+  .roster-card__media { aspect-ratio:1 / 1; }
+  .roster-card__name { font-size:clamp(24px,4vw,30px); }
+  .roster-outro { padding-bottom:70px; }
+  .roster-outro__panel { display:block; min-height:auto; padding:32px 26px; }
+  .roster-outro__link { max-width:280px; margin-top:28px; }
+}
+@media (max-width:600px) {
+  .roster-grid { grid-template-columns:1fr; }
+  .roster-card { max-width:480px; width:100%; margin-inline:auto; }
+  .roster-card__media { aspect-ratio:1.26 / 1; }
+  .roster-card__info { padding:22px 24px; }
+  .roster-card__name { font-size:30px; }
+  .roster-card__description { margin-bottom:21px; }
+}
+@media (max-width:390px) {
+  .roster-hero__container { padding-top:108px; }
+  .roster-hero__title { font-size:clamp(45px,12vw,52px); }
+  .roster-hero__visual { height:255px; }
+  .roster-hero__vertical { font-size:7px; }
+  .roster-hero__footer span:last-child { max-width:120px; text-align:right; }
+  .roster-card__media { aspect-ratio:1.1 / 1; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .roster-card,.roster-card__media img,.roster-hero__button,.roster-outro__link,.roster-card__name a,.roster-card__action { transition:none; }
+  .roster-card:hover { transform:none; }
+  .roster-card:hover .roster-card__media img { transform:none; }
+}

@@ -1,0 +1,361 @@
+@use './base/base';
+@use './base/variables' as v;
+@use './components/header';
+@use './components/footer';
+.coaches-people__top {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 35px;
+  margin-bottom: 26px;
+}
+.coaches-people__top > div {
+  min-width: 0;
+}
+.coaches-people__eyebrow {
+  display: block;
+  margin-bottom: 13px;
+  color: #bc202b;
+  font:
+    700 11px/1.4 'Inter',
+    sans-serif;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.coaches-people__top h2 {
+  margin: 0;
+  font:
+    600 clamp(35px, 3.5vw, 63px)/1.09 'Oswald',
+    sans-serif;
+  text-transform: uppercase;
+}
+.coaches-people__top p {
+  max-width: 420px;
+  margin: 0;
+  color: #697383;
+  font:
+    400 14px/1.65 'Inter',
+    sans-serif;
+}
+.coaches-people__notice {
+  margin: 0 0 28px;
+  border-left: 3px solid #bc202b;
+  background: #f0f0ef;
+  padding: 12px 16px;
+  color: #687485;
+  font:
+    400 12px/1.6 'Inter',
+    sans-serif;
+}
+.coaches-people__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(12px, 1.5vw, 25px);
+}
+.coach-card {
+  min-width: 0;
+}
+.coach-card__photo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  border-radius: 9px;
+  background: linear-gradient(150deg, #304458 0%, #1c2f45 53%, #0d1b31 100%);
+  color: #e0e5ed;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+.coach-card:nth-child(5n + 2) .coach-card__photo {
+  background: linear-gradient(150deg, #293e54, #17263c);
+}
+.coach-card:nth-child(5n + 3) .coach-card__photo {
+  background: linear-gradient(150deg, #3b4a5a, #19344a);
+}
+.coach-card:nth-child(5n + 4) .coach-card__photo {
+  background: linear-gradient(150deg, #2e3e51, #1a2d3e);
+}
+.coach-card:nth-child(5n + 5) .coach-card__photo {
+  background: linear-gradient(150deg, #3b4656, #101f35);
+}
+.coach-card__photo::before {
+  content: '';
+  position: absolute;
+  inset: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 3px;
+}
+.coach-card__photo::after {
+  content: 'ФХ';
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font:
+    600 clamp(68px, 6vw, 125px)/1 'Oswald',
+    sans-serif;
+  color: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+.coach-card__num {
+  position: absolute;
+  left: 23px;
+  top: 22px;
+  font:
+    500 13px/1 'Oswald',
+    sans-serif;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.68);
+}
+.coach-card__placeholder {
+  z-index: 1;
+  position: relative;
+  margin-top: 26px;
+  text-align: center;
+  font:
+    700 10px/1.5 'Inter',
+    sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.coach-card__details {
+  padding: 15px 0 0;
+}
+.coach-card__details h3 {
+  margin: 0 0 7px;
+  font:
+    500 clamp(17px, 1.3vw, 24px)/1.3 'Oswald',
+    sans-serif;
+  color: #111d37;
+  text-transform: uppercase;
+}
+.coach-card__details p {
+  margin: 0;
+  color: #707986;
+  font:
+    400 11px/1.55 'Inter',
+    sans-serif;
+}
+@media (hover: hover) and (pointer: fine) {
+  .coach-card:hover .coach-card__photo {
+    transform: translateY(-5px);
+    box-shadow: 0 17px 34px rgba(16, 35, 56, 0.16);
+  }
+}
+@media (max-width: 1150px) {
+  .coaches-people__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 850px) {
+  .coaches-people__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .coaches-people__top {
+    align-items: start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+@media (max-width: 600px) {
+  .coaches-people__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 12px;
+  }
+  .coaches-people__top h2 {
+    font-size: 35px;
+  }
+  .coach-card__details h3 {
+    font-size: 17px;
+  }
+  .coach-card__details p {
+    font-size: 10px;
+  }
+  .coach-card__placeholder {
+    font-size: 9px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coach-card__photo {
+    transition: none;
+  }
+}
+/* Страница тренеров: герой по концепции Зала славы */
+.coaches-page {
+  background: #fbfaf8;
+}
+.coaches-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #fbfaf8;
+  color: #111d37;
+}
+.coaches-hero__visual {
+  position: absolute;
+  inset: 0;
+  background: url('/site/img/family-team.webp') center center/cover no-repeat;
+}
+.coaches-hero::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    #fbfaf8 0%,
+    rgba(251, 250, 248, 0.97) 24%,
+    rgba(251, 250, 248, 0.81) 43%,
+    rgba(251, 250, 248, 0.18) 70%,
+    rgba(251, 250, 248, 0.05) 100%
+  );
+}
+.coaches-hero__container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  padding-top: clamp(148px, 18vh, 205px);
+  padding-bottom: clamp(20px, 3.5vh, 40px);
+}
+.coaches-hero__content {
+  width: min(650px, 52%);
+  padding-top: clamp(0px, 3vh, 48px);
+}
+.coaches-hero__eyebrow {
+  display: block;
+  margin-bottom: 16px;
+  color: #616977;
+  font:
+    700 clamp(10px, 0.85vw, 12px)/1.3 'Inter',
+    sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.coaches-hero__content h1 {
+  margin: 0;
+  font:
+    700 clamp(52px, 5.15vw, 94px)/1.04 'Oswald',
+    sans-serif;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+.coaches-hero__content h1 span {
+  display: block;
+  color: #bc202b;
+}
+.coaches-hero__content p {
+  max-width: 400px;
+  margin: 22px 0 0;
+  color: #525a68;
+  font:
+    400 clamp(13px, 1.05vw, 16px)/1.6 'Inter',
+    sans-serif;
+}
+.coaches-hero__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: auto;
+  min-height: 96px;
+  padding: 17px 30px;
+  border: 1px solid rgba(188, 32, 43, 0.45);
+  border-radius: 14px;
+  background: rgba(251, 250, 248, 0.94);
+  box-shadow: 0 14px 50px rgba(17, 29, 55, 0.16);
+  backdrop-filter: blur(15px);
+}
+.coaches-hero__bottom > span {
+  font:
+    700 12px/1.4 'Inter',
+    sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.coaches-hero__bottom a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 22px;
+  min-height: 45px;
+  border-radius: 7px;
+  background: #bc202b;
+  color: #fff;
+  font:
+    700 12px/1.3 'Inter',
+    sans-serif;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+.coaches-hero__bottom a:hover {
+  background: #9e1722;
+}
+.coaches-hero__bottom a:active {
+  transform: scale(0.98);
+}
+.coaches-hero__bottom a:focus-visible {
+  outline: 3px solid #bc202b;
+  outline-offset: 3px;
+}
+.coaches-people {
+  padding: clamp(60px, 6vw, 105px) 0 clamp(86px, 8vw, 140px);
+  scroll-margin-top: 95px;
+  background: #fbfaf8;
+  color: #111d37;
+}
+@media (max-width: 767px) {
+  .coaches-hero__container {
+    padding-top: 122px;
+    padding-bottom: 18px;
+  }
+  .coaches-hero__content {
+    width: 100%;
+    max-width: 550px;
+  }
+  .coaches-hero__visual {
+    top: clamp(275px, 36svh, 355px);
+    background-position: 53% center;
+  }
+  .coaches-hero::before {
+    background: linear-gradient(
+      180deg,
+      #fbfaf8 0%,
+      #fbfaf8 32%,
+      rgba(251, 250, 248, 0.9) 42%,
+      rgba(251, 250, 248, 0.35) 60%,
+      transparent 72%
+    );
+  }
+  .coaches-hero__bottom {
+    padding: 15px;
+    min-height: 80px;
+  }
+  .coaches-hero__bottom > span {
+    font-size: 10px;
+    max-width: 170px;
+  }
+  .coaches-hero__bottom a {
+    font-size: 10px;
+    padding: 10px 12px;
+  }
+}
+@media (max-width: 380px) {
+  .coaches-hero__container {
+    padding-top: 109px;
+  }
+  .coaches-hero__content h1 {
+    font-size: 45px;
+  }
+  .coaches-hero__bottom > span {
+    font-size: 9px;
+    max-width: 145px;
+  }
+}

@@ -402,6 +402,310 @@ body.lock {
     transition: none;
   }
 }
+/* Общий поиск Федерации: Header + модальное окно. */
+.header__search {
+  display: inline-flex;
+  flex: 0 0 42px;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.29);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.header__search:hover,
+.header__search[aria-expanded=true] {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.63);
+}
+
+.header__search:active {
+  transform: scale(0.98);
+}
+
+.header__search:focus-visible,
+.site-search__close:focus-visible,
+.site-search__field:focus-within,
+.site-search__result:focus-visible {
+  outline: 2px solid #f04b5b;
+  outline-offset: 3px;
+}
+
+.site-search[hidden] {
+  display: none;
+}
+
+.site-search {
+  position: fixed;
+  z-index: 2200;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: min(14vh, 130px) 18px 22px;
+  pointer-events: auto;
+}
+
+.site-search__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 12, 24, 0.79);
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+}
+
+.site-search__dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(730px, 100%);
+  max-height: calc(100dvh - min(14vh, 130px) - 22px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: clamp(20px, 3vw, 36px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  background: #fdfcfb;
+  color: #13213b;
+  box-shadow: 0 35px 110px rgba(0, 0, 0, 0.32);
+}
+
+.site-search__top {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.site-search__eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: #c6283e;
+  font: 700 10px/1.4 "Inter", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.site-search__title {
+  margin: 0;
+  font: 600 clamp(29px, 4vw, 44px)/1.07 "Oswald", sans-serif;
+  text-transform: uppercase;
+}
+
+.site-search__close {
+  display: inline-flex;
+  flex: 0 0 40px;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid #d4d9e0;
+  border-radius: 9px;
+  background: #fff;
+  color: #15223a;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.site-search__close:hover {
+  background: #f1f3f6;
+}
+
+.site-search__close:active {
+  transform: scale(0.98);
+}
+
+.site-search__form {
+  margin-top: 26px;
+}
+
+.site-search__label {
+  display: block;
+  margin-bottom: 9px;
+  color: #4e5b6d;
+  font: 600 12px/1.3 "Inter", sans-serif;
+}
+
+.site-search__field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 57px;
+  padding: 0 17px;
+  border: 1px solid #b9c0cb;
+  border-radius: 10px;
+  background: #fff;
+  color: #657387;
+  transition: border-color 0.2s ease;
+}
+
+.site-search__field:focus-within {
+  border-color: #c6283e;
+}
+
+.site-search__field svg {
+  flex: 0 0 auto;
+}
+
+.site-search__field input {
+  width: 100%;
+  min-width: 0;
+  height: 53px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #15223a;
+  font: 500 16px/1.4 "Inter", sans-serif;
+}
+
+.site-search__field input::placeholder {
+  color: #8692a3;
+}
+
+.site-search__summary {
+  padding: 24px 0 9px;
+  color: #647185;
+  font: 700 11px/1.5 "Inter", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-search__results {
+  display: grid;
+  gap: 8px;
+}
+
+.site-search__result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-width: 0;
+  padding: 15px 17px;
+  border: 1px solid #e0e3e9;
+  border-radius: 10px;
+  background: #fff;
+  color: #17243b;
+  text-align: left;
+  text-decoration: none;
+  transition: background 0.22s ease, border-color 0.22s ease;
+}
+
+a.site-search__result:hover,
+a.site-search__result:focus-visible {
+  border-color: #c6283e;
+  background: #fff6f7;
+}
+
+.site-search__result--pending {
+  background: #f3f5f7;
+}
+
+.site-search__result-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.site-search__result-category {
+  color: #b82339;
+  font: 700 10px/1.3 "Inter", sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.site-search__result-title {
+  color: #17243b;
+  font: 600 clamp(17px, 2.2vw, 20px)/1.17 "Oswald", sans-serif;
+}
+
+.site-search__result-description {
+  color: #5d687a;
+  font: 400 12px/1.5 "Inter", sans-serif;
+}
+
+.site-search__result-action {
+  flex: 0 0 auto;
+  color: #c6283e;
+  font: 700 11px/1.4 "Inter", sans-serif;
+  white-space: nowrap;
+}
+
+.site-search__result--pending .site-search__result-action {
+  color: #6c7582;
+}
+
+.site-search__empty {
+  margin: 0;
+  padding: 20px;
+  border-radius: 10px;
+  background: #f2f4f7;
+  color: #5d687a;
+  font: 400 13px/1.6 "Inter", sans-serif;
+}
+
+.site-search__hint {
+  margin: 18px 0 0;
+  color: #777f8d;
+  font: 400 11px/1.55 "Inter", sans-serif;
+}
+
+body.site-search-open {
+  overflow: hidden;
+}
+
+@media (max-width: 1180px) {
+  .header__search {
+    margin-left: auto;
+  }
+}
+@media (max-width: 767px) {
+  .header__inner {
+    gap: 6px;
+  }
+  .header__search {
+    flex-basis: 36px;
+    width: 36px;
+    height: 40px;
+    border-color: transparent;
+    background: transparent;
+  }
+  .header__burger {
+    width: 38px;
+    height: 40px;
+  }
+  .site-search {
+    padding: 10px 10px 18px;
+  }
+  .site-search__dialog {
+    max-height: calc(100dvh - 20px);
+    padding: 20px 17px;
+    border-radius: 14px;
+  }
+  .site-search__form {
+    margin-top: 22px;
+  }
+  .site-search__result {
+    padding: 13px 11px;
+    gap: 10px;
+  }
+  .site-search__result-action {
+    font-size: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header__search, .site-search__close, .site-search__field, .site-search__result {
+    transition: none;
+  }
+}
 .footer {
   position: relative;
   width: 100%;

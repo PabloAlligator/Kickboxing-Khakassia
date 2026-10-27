@@ -71,7 +71,7 @@
     // Текущая страница в навигации.
     const current = window.location.pathname;
     header.querySelectorAll('.header__nav a, .mobile-menu__nav a').forEach((link) => {
-      const url = new URL(link.href, window.location.origin);
+      const url = new URL(link.href, document.baseURI);
       if (url.pathname === current && !url.hash) {
         link.classList.add('is-current');
         link.setAttribute('aria-current', 'page');
@@ -393,12 +393,11 @@
     reducedMotion.addEventListener('change', scheduleUpdate);
   }
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    await Promise.all([
-      mount('site-header', '/components/header.html?v=landshaft-1'),
-      mount('site-footer', '/components/footer.html'),
-    ]);
-    initHeader();
+  document.addEventListener('DOMContentLoaded', () => {
+    // Header и Footer загружаются независимо: медленный Footer не блокирует меню.
+    mount('site-header', '/components/header.html?v=search-fix-3')
+      .then(initHeader);
+    mount('site-footer', '/components/footer.html');
     initCountdown();
     initAchievements();
     initAthletesCarousel();

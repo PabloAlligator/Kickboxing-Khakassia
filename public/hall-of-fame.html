@@ -43,15 +43,14 @@
               </svg>
               <span><strong>Легенды</strong><small>Выдающиеся спортсмены</small></span>
             </a>
-            <span class="hall-hero__nav-item hall-hero__nav-item--inactive"
-              aria-label="Спортсмены — раздел появится позже">
+            <a class="hall-hero__nav-item" href="#athletes">
               <svg class="hall-hero__nav-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
                 <circle cx="24" cy="28" r="10" stroke="currentColor" stroke-width="2" />
                 <path d="m17 6 7 12 7-12M18 6h12M24 24v9m-4-4h8"
                   stroke="currentColor" stroke-width="2" />
               </svg>
-              <span><strong>Спортсмены</strong><small>Действующие и бывшие</small></span>
-            </span>
+              <span><strong>Спортсмены</strong><small>Архивные спортсмены</small></span>
+            </a>
             <a class="hall-hero__nav-item" href="#archive">
               <svg class="hall-hero__nav-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
                 <path d="M5 14h16l5 5h17v21H5V14ZM5 19h38"
@@ -64,10 +63,10 @@
       </section>
       <!-- Этап 04: четыре статичные карточки, пока без фотографий. -->
 
-      <div class="hall-page-flow" data-hall-page-flow>
+      <div class="hall-page-flow" data-hall-page-flow data-current="legends">
       <section
         class="hall-legends"
-        id="legends"
+        id="legends" data-hall-panel="legends"
         aria-labelledby="hall-legends-title"
       >
         <div class="container">
@@ -212,7 +211,55 @@
           </div>
         </div>
       </section>
-      <section class="hall-archive" id="archive" aria-labelledby="hall-archive-title">
+            <section class="hall-people" id="athletes" data-hall-panel="athletes" aria-labelledby="hall-people-title">
+        <div class="container">
+          <div class="hall-people__top"><div><span class="hall-people__eyebrow">Спортивное наследие Хакасии</span><h2 id="hall-people-title">Архив спортсменов</h2></div><p>Имена и лица тех, кто сохранял и развивал традиции кикбоксинга в Хакасии.</p></div>
+          <p class="hall-people__notice">Фотографии, имена и достижения будут опубликованы после подтверждения Федерацией. Ниже — места для будущих портретов.</p>
+          <div class="hall-people__grid">
+            <article class="heritage-card">
+              <div class="heritage-card__photo" role="img" aria-label="Фотография архивного спортсмена будет добавлена"><span class="heritage-card__num">01</span><span class="heritage-card__placeholder">Фотография<br>готовится</span></div>
+              <div class="heritage-card__details"><h3>Имя спортсмена</h3><p>Архивные сведения уточняются</p></div>
+            </article>
+            <article class="heritage-card">
+              <div class="heritage-card__photo" role="img" aria-label="Фотография архивного спортсмена будет добавлена"><span class="heritage-card__num">02</span><span class="heritage-card__placeholder">Фотография<br>готовится</span></div>
+              <div class="heritage-card__details"><h3>Имя спортсмена</h3><p>Архивные сведения уточняются</p></div>
+            </article>
+            <article class="heritage-card">
+              <div class="heritage-card__photo" role="img" aria-label="Фотография архивного спортсмена будет добавлена"><span class="heritage-card__num">03</span><span class="heritage-card__placeholder">Фотография<br>готовится</span></div>
+              <div class="heritage-card__details"><h3>Имя спортсмена</h3><p>Архивные сведения уточняются</p></div>
+            </article>
+            <article class="heritage-card">
+              <div class="heritage-card__photo" role="img" aria-label="Фотография архивного спортсмена будет добавлена"><span class="heritage-card__num">04</span><span class="heritage-card__placeholder">Фотография<br>готовится</span></div>
+              <div class="heritage-card__details"><h3>Имя спортсмена</h3><p>Архивные сведения уточняются</p></div>
+            </article>
+            <article class="heritage-card">
+              <div class="heritage-card__photo" role="img" aria-label="Фотография архивного спортсмена будет добавлена"><span class="heritage-card__num">05</span><span class="heritage-card__placeholder">Фотография<br>готовится</span></div>
+              <div class="heritage-card__details"><h3>Имя спортсмена</h3><p>Архивные сведения уточняются</p></div>
+            </article>
+            <article class="heritage-card">
+              <div class="heritage-card__photo" role="img" aria-label="Фотография архивного спортсмена будет добавлена"><span class="heritage-card__num">06</span><span class="heritage-card__placeholder">Фотография<br>готовится</span></div>
+              <div class="heritage-card__details"><h3>Имя спортсмена</h3><p>Архивные сведения уточняются</p></div>
+            </article>
+            <article class="heritage-card">
+              <div class="heritage-card__photo" role="img" aria-label="Фотография архивного спортсмена будет добавлена"><span class="heritage-card__num">07</span><span class="heritage-card__placeholder">Фотография<br>готовится</span></div>
+              <div class="heritage-card__details"><h3>Имя спортсмена</h3><p>Архивные сведения уточняются</p></div>
+            </article>
+            <article class="heritage-card">
+              <div class="heritage-card__photo" role="img" aria-label="Фотография архивного спортсмена будет добавлена"><span class="heritage-card__num">08</span><span class="heritage-card__placeholder">Фотография<br>готовится</span></div>
+              <div class="heritage-card__details"><h3>Имя спортсмена</h3><p>Архивные сведения уточняются</p></div>
+            </article>
+            <article class="heritage-card">
+              <div class="heritage-card__photo" role="img" aria-label="Фотография архивного спортсмена будет добавлена"><span class="heritage-card__num">09</span><span class="heritage-card__placeholder">Фотография<br>готовится</span></div>
+              <div class="heritage-card__details"><h3>Имя спортсмена</h3><p>Архивные сведения уточняются</p></div>
+            </article>
+            <article class="heritage-card">
+              <div class="heritage-card__photo" role="img" aria-label="Фотография архивного спортсмена будет добавлена"><span class="heritage-card__num">10</span><span class="heritage-card__placeholder">Фотография<br>готовится</span></div>
+              <div class="heritage-card__details"><h3>Имя спортсмена</h3><p>Архивные сведения уточняются</p></div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="hall-archive" id="archive" data-hall-panel="archive" aria-labelledby="hall-archive-title">
         <div class="hall-archive__scene" aria-hidden="true"></div>
         <div class="container hall-archive__container">
           <div class="hall-archive__content">
@@ -224,15 +271,25 @@
             </p>
             <!-- Раздел архива ещё не создан. CTA визуальный, не ведёт на 404. -->
             <span class="hall-archive__button" aria-label="Раздел архива находится в подготовке">
-              Перейти в архив
+              Архив пополняется
             </span>
+          </div>
+        </div>
+      </section>
+      <section class="hall-archive-photos" data-hall-panel="archive" aria-labelledby="hall-archive-photos-title">
+        <div class="container">
+          <div class="hall-archive-photos__title"><span>Материалы Федерации</span><h2 id="hall-archive-photos-title">Фотографии из истории</h2><p>Участники, даты и события будут подписаны после проверки материалов.</p></div>
+          <div class="hall-archive-photos__grid">
+            <figure><img src="/site/img/fam-team.jpg" loading="lazy" alt="Групповой снимок участников соревнований по кикбоксингу"><figcaption>Архивное фото · подробности уточняются</figcaption></figure>
+            <figure><img src="/site/img/family-team.webp" loading="lazy" alt="Спортсмены и представители кикбоксинга на общем снимке"><figcaption>Спортсмены и наставники · подробности уточняются</figcaption></figure>
           </div>
         </div>
       </section>
       </div>
     </main>
     <div id="site-footer"></div>
-    <script src="/site/scripts/main.js"></script>
+    <script src="/site/scripts/site-search.js?v=search-fix-3"></script>
+    <script src="/site/scripts/main.js?v=search-fix-3"></script>
     <script src="/site/scripts/hall.js"></script>
   </body>
 </html>
