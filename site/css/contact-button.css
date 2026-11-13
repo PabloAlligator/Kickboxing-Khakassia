@@ -56,10 +56,10 @@
 }
 @media (max-width: 1024px) {
   .site-call {
-    right: 16px;
-    right: max(16px, env(safe-area-inset-right, 0px));
-    bottom: 16px;
-    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    right: 24px;
+    right: calc(24px + env(safe-area-inset-right, 0px));
+    bottom: 28px;
+    bottom: calc(28px + env(safe-area-inset-bottom, 0px));
     width: 52px;
     height: 52px;
     min-height: 52px;

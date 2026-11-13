@@ -2,7 +2,7 @@ const {test}=require('node:test');const assert=require('node:assert/strict');con
 const root=path.resolve(__dirname,'..'),script=fs.readFileSync(path.join(root,'site/scripts/contact-button.js'),'utf8');
 
 test('Кнопка: порог 120 px, динамический футер, возврат вверх и повторная инициализация',async t=>{
- const dom=new JSDOM('<!doctype html><html><body><a class="site-call" href="tel:+79233595555">Позвонить</a><div id="site-footer"></div></body></html>',{runScripts:'outside-only',pretendToBeVisual:true});t.after(()=>dom.window.close());
+ const dom=new JSDOM('<!doctype html><html><body><a class="site-call" href="tel:+79835910000">Позвонить</a><div id="site-footer"></div></body></html>',{runScripts:'outside-only',pretendToBeVisual:true});t.after(()=>dom.window.close());
  const w=dom.window,b=w.document.querySelector('.site-call');let y=0,top=2000,bottom=2300,raf=[];
  Object.defineProperty(w,'scrollY',{get:()=>y});Object.defineProperty(w,'innerHeight',{value:800,writable:true});w.requestAnimationFrame=cb=>{raf.push(cb);return raf.length;};
  const flush=async()=>{await Promise.resolve();const queued=raf;raf=[];queued.forEach(cb=>cb());};
@@ -15,7 +15,7 @@ test('Кнопка: порог 120 px, динамический футер, во
  await scroll(0);assert.ok(!b.classList.contains('is-visible'));
  y=300;w.dispatchEvent(new w.Event('pageshow'));await flush();assert.ok(b.classList.contains('is-visible'));
  top=700;w.dispatchEvent(new w.Event('resize'));await flush();assert.ok(!b.classList.contains('is-visible'));
- w.eval(script);assert.equal(w.document.querySelectorAll('.site-call').length,1);assert.equal(b.getAttribute('href'),'tel:+79233595555');
+ w.eval(script);assert.equal(w.document.querySelectorAll('.site-call').length,1);assert.equal(b.getAttribute('href'),'tel:+79835910000');
 });
 
 test('Все публичные шаблоны с кнопкой подключают ровно один контроллер',()=>{

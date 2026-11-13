@@ -37,7 +37,7 @@
   .site-call:hover { background: v.$color-red-hover; box-shadow: 0 8px 28px rgba(17, 29, 55, .3); transform: translateY(-2px); }
 }
 @media(max-width: 1024px) {
-  .site-call { right: 16px; right: max(16px, env(safe-area-inset-right, 0px)); bottom: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: 52px; height: 52px; min-height: 52px; padding: 0; gap: 0; }
+  .site-call { right: 24px; right: calc(24px + env(safe-area-inset-right, 0px)); bottom: 28px; bottom: calc(28px + env(safe-area-inset-bottom, 0px)); width: 52px; height: 52px; min-height: 52px; padding: 0; gap: 0; }
   .site-call__label { display: none; }
 }
 // The normal link remains usable without JavaScript. With JS, control visibility by scroll.

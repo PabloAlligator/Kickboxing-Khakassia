@@ -14,7 +14,7 @@ test('SEO/AEO/GEO: публичные снимки, SSR, Schema.org, canonical, 
  await db.competition.create({data:{title:'DRAFT-COMPETITION-SECRET',payload:JSON.stringify({...competition,title:'DRAFT-COMPETITION-SECRET'}),publishedPayload:JSON.stringify(competition),status:'published',slug:'public-event',publishedOn:when}});
  const {validateHistory}=await import('../services/history.service.js');const history=validateHistory({title:'Публичная история',section:'story',dateType:'period',period:'1990-е',lead:'Анонс истории',body:'Текст исторического материала',gallery:[],sources:[],people:[],competitions:[],detail:true});
  await db.historyMaterial.create({data:{title:'DRAFT-HISTORY-SECRET',payload:JSON.stringify({...history,title:'DRAFT-HISTORY-SECRET'}),publishedPayload:JSON.stringify(history),status:'published',slug:'public-history',publishedOn:when}});
- await db.sitePage.create({data:{key:'contacts',payload:'{"email":"private@example.org"}',publishedPayload:'{"phone":"+7 923 359-55-55","email":"public@example.org","address":"Опубликованный адрес","socials":[{"name":"Сообщество","url":"https://example.org/federation"}]}',publishedOn:when}});
+ await db.sitePage.create({data:{key:'contacts',payload:'{"email":"private@example.org"}',publishedPayload:'{"phone":"+7 983 591-00-00","email":"public@example.org","address":"Опубликованный адрес","socials":[{"name":"Сообщество","url":"https://example.org/federation"}]}',publishedOn:when}});
  await db.sitePage.create({data:{key:'federation',payload:'{"intro":"PRIVATE-ABOUT"}',publishedPayload:'{"intro":"Опубликованные сведения","activities":[],"leaders":[],"clubs":[]}',publishedOn:when}});
  await db.student.create({data:{name:'PRIVATE-STUDENT-SECRET',start:'2026-11-01',price:100000,status:'active'}});
  const config={ROOT:root,production:true,origin:'https://kickboxing19.ru',origins:['https://kickboxing19.ru'],seoIndexable:true,seoVerification:{'google-site-verification':'google-test','yandex-verification':'yandex-test','msvalidate.01':'bing-test'}};
@@ -37,7 +37,7 @@ test('SEO/AEO/GEO: публичные снимки, SSR, Schema.org, canonical, 
  });
  await t.test('Главная содержит видимые ответы, совпадающие с разметкой; контакты только опубликованные',async()=>{
   const p=parse((await html('/')).text),faq=p.graph.find(g=>g['@type']==='FAQPage');assert.equal(faq.mainEntity.length,5);for(const q of faq.mainEntity){assert.ok(p.doc.querySelector('main').textContent.includes(q.name));assert.ok(p.doc.querySelector('main').textContent.includes(q.acceptedAnswer.text));}
-  const org=p.graph.find(g=>g['@type']==='SportsOrganization');assert.equal(org.telephone,'+79233595555');assert.equal(org.email,'public@example.org');assert.ok(!JSON.stringify(p.graph).includes('private@example.org'));assert.equal(org.areaServed.name,'Республика Хакасия');p.close();
+  const org=p.graph.find(g=>g['@type']==='SportsOrganization');assert.equal(org.telephone,'+79835910000');assert.equal(org.email,'public@example.org');assert.ok(!JSON.stringify(p.graph).includes('private@example.org'));assert.equal(org.areaServed.name,'Республика Хакасия');p.close();
  });
  await t.test('Каталоги и главная содержат ссылки и названия публикаций без выполнения JS',async()=>{
   for(const [route,selector,href]of [['/news','#news-featured','/news/public-news'],['/competitions','#event-groups','/competitions/public-event'],['/','.home-feed__news-list','/news/public-news']]){const p=parse((await html(route)).text);assert.ok(p.doc.querySelector(selector+' a[href="'+href+'"]'),route);p.close();}

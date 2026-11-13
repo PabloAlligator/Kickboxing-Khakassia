@@ -6,11 +6,11 @@ test('Кнопка звонка доступна без JS на всех неп�
  for(const file of fs.readdirSync(path.join(root,'public')).filter(f=>f.endsWith('.html'))){
   const html=fs.readFileSync(path.join(root,'public',file),'utf8');if(!html.trim())continue;
   const dom=new JSDOM(html),d=dom.window.document;const links=d.querySelectorAll('a.site-call');assert.equal(links.length,1,file);
-  assert.equal(links[0].getAttribute('href'),'tel:+79233595555',file);assert.match(links[0].getAttribute('aria-label'),/923 359-55-55/);
+  assert.equal(links[0].getAttribute('href'),'tel:+79835910000',file);assert.match(links[0].getAttribute('aria-label'),/983 591-00-00/);
   assert.ok(links[0].textContent.includes('Позвонить'));assert.equal(links[0].parentElement,d.body);assert.equal(d.querySelectorAll('link[href^="/site/css/contact-button.min.css"]').length,1,file);dom.window.close();count++;
  }
  assert.equal(count,18);
- for(const folder of ['people','history'])for(const file of fs.readdirSync(path.join(root,'views',folder)).filter(f=>f.endsWith('.html'))){const dom=new JSDOM(fs.readFileSync(path.join(root,'views',folder,file),'utf8'));assert.equal(dom.window.document.querySelectorAll('a.site-call[href="tel:+79233595555"]').length,1,'views/'+folder+'/'+file);dom.window.close();}
+ for(const folder of ['people','history'])for(const file of fs.readdirSync(path.join(root,'views',folder)).filter(f=>f.endsWith('.html'))){const dom=new JSDOM(fs.readFileSync(path.join(root,'views',folder,file),'utf8'));assert.equal(dom.window.document.querySelectorAll('a.site-call[href="tel:+79835910000"]').length,1,'views/'+folder+'/'+file);dom.window.close();}
  for(const file of fs.readdirSync(path.join(root,'admin-pages')).filter(f=>f.endsWith('.html')))assert.ok(!fs.readFileSync(path.join(root,'admin-pages',file),'utf8').includes('site-call'),file);
 });
 
